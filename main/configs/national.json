@@ -8,7 +8,7 @@
         "systemLocation":"Across the Nation",
         "appearanceSettings":{
             "nationalConfig":false,
-            "iconSet":"2010",
+            "iconSet":"2007",
             "providerName":"Mist Digital Cable",
             "startupTime":10000,
             "crawlMode":"both",
@@ -17,7 +17,7 @@
             "providerImage":"mistdc",
             "adImages":[],
             "version":"1.0.0",
-            "backgroundImage":"wxscan_default_bg_new",
+            "backgroundImage":"wxscan_default_bg",
             "condensedCrawlFont": {
               "adCrawl": false,
               "ccTicker": false
