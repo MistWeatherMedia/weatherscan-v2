@@ -419,6 +419,8 @@ function grabNearbyCities(lat, lon) {
     let locpull = locationQueue.shift();
     $.getJSON(`https://api.weather.com/v3/location/near?geocode=${locpull}&product=observation&format=json&apiKey=${systemSettings.apiKeys.api_key}`, function (data) {
         for (let i = 0; i < data.location.stationId.length; i++) {
+            // Skip BUOY observation stations — TWC API doesn't have data for them
+            if (data.location.obsType && data.location.obsType[i] === "BUOY") continue;
             createNewNearbyCity(data.location.stationId[i]);
         }
         if (newCities.length >= 8) {
@@ -472,6 +474,8 @@ function grabExtraCities(lat, lon) {
     $.getJSON(`https://api.weather.com/v3/location/near?geocode=${lat},${lon}&product=observation&format=json&apiKey=${systemSettings.apiKeys.api_key}`, function (data) {
         //console.log(data);
         for (let i = 0; i < data.location.stationId.length; i++) {
+            // Skip BUOY observation stations — TWC API doesn't have data for them
+            if (data.location.obsType && data.location.obsType[i] === "BUOY") continue;
             createNewExtraCity(data.location.stationId[i], data.location.distanceMi[i]);
             if (i == data.location.stationId.length - 1) {
                 //console.log(newExtraCities);
@@ -556,6 +560,9 @@ var tickerArray = []
 function grabTickerCities(lat,lon){
     $.getJSON(`https://api.weather.com/v3/location/near?geocode=${lat},${lon}&product=observation&format=json&apiKey=${systemSettings.apiKeys.api_key}`, function (data) {
         for(let i = 0; i < 10; i++){
+            // Skip BUOY observation stations — TWC API doesn't have data for them
+            const idx = (i * 5) % data.location.obsType.length;
+            if (data.location.obsType && data.location.obsType[idx] === "BUOY") continue;
             createNewCity(data.location.latitude[((i*5) % data.location.latitude.length)], data.location.longitude[((i*2) % data.location.latitude.length)], tickerArray);
         }
         if(tickerArray.length < 10){
