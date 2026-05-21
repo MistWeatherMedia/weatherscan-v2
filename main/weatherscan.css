@@ -347,7 +347,7 @@ img#mist-logo {
   position: absolute;
   width: 1620px;
   height: 1080px;
-  background: url(images/lbarreference9.png);
+
   background-size: 100% 100%;
   image-rendering: pixelated;
   z-index: 0;
