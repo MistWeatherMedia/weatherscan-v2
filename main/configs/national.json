@@ -52,21 +52,20 @@
             ],
             "cities":[],
             "travelCities":[
-              {"locationName": "Chicago", "locationID": "KORD", "lat": "41.8832", "lon": "-87.6324"},
-              {"locationName": "Dallas", "locationID": "KDAL", "lat": "32.7767", "lon": "-96.7970"},
-              {"locationName": "Houston", "locationID": "KIAH", "lat": "29.7601", "lon": "-95.3701"},
-              {"locationName": "Jacksonville", "locationID": "KJAX", "lat": "30.3298", "lon": "-81.6592"},
-              {"locationName": "Los Angeles", "locationID": "KLAX", "lat": "34.0549", "lon": "-118.2426"},
-              {"locationName": "New York", "locationID": "KLGA", "lat": "40.7128", "lon": "-74.0060"},
-              {"locationName": "Philadelphia", "locationID": "KPHL", "lat": "39.9526", "lon": "-75.1652"},
-              {"locationName": "Phoenix", "locationID": "KPHX", "lat": "33.4483", "lon": "-112.0725"},
-              {"locationName": "San Antonio", "locationID": "KSAT", "lat": "29.4252", "lon": "-98.4946"},
-              {"locationName": "San Diego", "locationID": "KSAN", "lat": "32.7157", "lon": "-117.1611"}
+              {"locationName": "Chicago", "locationID": "USIL0225:1:US"},
+              {"locationName": "Dallas", "locationID": "USTX0327:1:US"},
+              {"locationName": "Houston", "locationID": "USTX0617:1:US"},
+              {"locationName": "Jacksonville", "locationID": "USFL0228:1:US"},
+              {"locationName": "Los Angeles", "locationID": "USCA0090:1:US"},
+              {"locationName": "New York", "locationID": "USNY0996:1:US"},
+              {"locationName": "Philadelphia", "locationID": "USPA1276:1:US"},
+              {"locationName": "Phoenix", "locationID": "USAZ0166:1:US"},
+              {"locationName": "San Antonio", "locationID": "USTX1200:1:US"},
+              {"locationName": "San Diego", "locationID": "USCA0982:1:US"}
             ]
           },
           "locations": {
             "autoFind": false,
-            "maxCities": 1,
             "type": "static",
             "cities": [
               {
@@ -74,7 +73,7 @@
                 "lat": "38.9073",
                 "lon": "-77.0369",
                 "obsName":"Washington DC",
-                "locationID":"KISP"
+                "icaoCode":"KISP"
               }
             ]
           },
@@ -99,8 +98,8 @@
             "autoFind":false,
             "locationName":"Across the Nation",
             "bulletinName":"Across the Nation",
-            "lat": "",
-            "lon": "",
+            "lat": "38.889805",
+            "lon": "-77.009056",
             "obsName":"Across the Nation",
             "locationID":"",
             "almanacLocationName":"Across the Nation",
@@ -127,7 +126,7 @@
                     "lat": "33.751",
                     "lon": "-84.39",
                     "obsName":"Atlanta Int`l Arpt.",
-                    "locationID":"KATL",
+                    "icaoCode":"KATL",
                     "upNextBG":"atlanta_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -162,7 +161,7 @@
                     "lat": "39.2905",
                     "lon": "-76.6104",
                     "obsName":"Baltimore",
-                    "locationID":"KBWI",
+                    "icaoCode":"KBWI",
                     "upNextBG":"baltimore_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -194,7 +193,7 @@
                     "lat": "42.3555",
                     "lon": "-71.0565",
                     "obsName":"Boston",
-                    "locationID":"KBOS",
+                    "icaoCode":"KBOS",
                     "upNextBG":"boston_bg",
                     "slidesBG":"core_ocean_bg",
                     "radar": {
@@ -225,7 +224,7 @@
                     "lat": "35.2271",
                     "lon": "-80.8409",
                     "obsName":"Charlotte Douglas Arpt.",
-                    "locationID":"KCLT",
+                    "icaoCode":"KCLT",
                     "upNextBG":"charlotte_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -258,7 +257,7 @@
                     "lat": "41.8832",
                     "lon": "-87.6324",
                     "obsName":"O'Hare Arpt.",
-                    "locationID":"KORD",
+                    "icaoCode":"KORD",
                     "upNextBG":"chicago_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -296,7 +295,7 @@
                     "lat": "41.4993",
                     "lon": "-81.6944",
                     "obsName":"Cleveland Int'l",
-                    "locationID":"KCLE",
+                    "icaoCode":"KCLE",
                     "upNextBG":"cleveland_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -334,7 +333,7 @@
                     "lat": "32.7767",
                     "lon": "-96.7970",
                     "obsName":"Dallas Love Field",
-                    "locationID":"KDAL",
+                    "icaoCode":"KDAL",
                     "upNextBG":"dallas_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -372,7 +371,7 @@
                     "lat": "39.7392",
                     "lon": "-104.9903",
                     "obsName":"Denver Int'l",
-                    "locationID":"KDEN",
+                    "icaoCode":"KDEN",
                     "upNextBG":"denver_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -410,7 +409,7 @@
                     "lat": "42.3297",
                     "lon": "-83.0425",
                     "obsName":"Detroit Metro Arpt.",
-                    "locationID":"KDTW",
+                    "icaoCode":"KDTW",
                     "upNextBG":"detroit_bg",
                     "slidesBG":"core_ocean_bg",
                     "radar": {
@@ -445,7 +444,7 @@
                     "lat": "32.7555",
                     "lon": "-97.3308",
                     "obsName":"Dallas/Ft. Worth Arpt.",
-                    "locationID":"KDFW",
+                    "icaoCode":"KDFW",
                     "upNextBG":"ftworth_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -483,7 +482,7 @@
                     "lat": "41.7658",
                     "lon": "-72.6734",
                     "obsName":"Hartford Arpt.",
-                    "locationID":"KHFD",
+                    "icaoCode":"KHFD",
                     "upNextBG":"hartford_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -518,7 +517,7 @@
                     "lat": "29.7601",
                     "lon": "-95.3701",
                     "obsName":"Houston",
-                    "locationID":"KIAH",
+                    "icaoCode":"KIAH",
                     "upNextBG":"houston_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -556,7 +555,7 @@
                     "lat": "39.7691",
                     "lon": "-86.1580",
                     "obsName":"Indianapolis Int'l",
-                    "locationID":"KIND",
+                    "icaoCode":"KIND",
                     "upNextBG":"indianapolis_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -594,7 +593,7 @@
                     "lat": "34.0549",
                     "lon": "-118.2426",
                     "obsName":"Los Angeles Int'l",
-                    "locationID":"KLAX",
+                    "icaoCode":"KLAX",
                     "upNextBG":"los_angeles_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -629,7 +628,7 @@
                     "lat": "25.7617",
                     "lon": "-80.1918",
                     "obsName":"Miami Int'l",
-                    "locationID":"KMIA",
+                    "icaoCode":"KMIA",
                     "upNextBG":"miami_bg",
                     "slidesBG":"core_ocean_bg",
                     "radar": {
@@ -663,7 +662,7 @@
                     "lat": "44.9778",
                     "lon": "-93.2650",
                     "obsName":"Minneapolis - St. Paul",
-                    "locationID":"KMSP",
+                    "icaoCode":"KMSP",
                     "upNextBG":"minneapolis_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -701,7 +700,7 @@
                     "lat": "36.1627",
                     "lon": "-86.7816",
                     "obsName":"Nashville Int'l",
-                    "locationID":"KBNA",
+                    "icaoCode":"KBNA",
                     "upNextBG":"nashville_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -736,7 +735,7 @@
                     "lat": "41.3083",
                     "lon": "-72.9279",
                     "obsName":"New Haven Arpt.",
-                    "locationID":"KHVN",
+                    "icaoCode":"KHVN",
                     "upNextBG":"new_haven_bg",
                     "slidesBG":"core_ocean_bg",
                     "radar": {
@@ -771,7 +770,7 @@
                     "lat": "40.7128",
                     "lon": "-74.0060",
                     "obsName":"New York / LaGuardia",
-                    "locationID":"KLGA",
+                    "icaoCode":"KLGA",
                     "upNextBG":"new_york_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -802,7 +801,7 @@
                     "lat": "35.4689",
                     "lon": "-97.5195",
                     "obsName":"Oklahoma City Int'l",
-                    "locationID":"KOKC",
+                    "icaoCode":"KOKC",
                     "upNextBG":"oklahoma_city_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -839,7 +838,7 @@
                     "lat": "28.5384",
                     "lon": "-81.3789",
                     "obsName":"Orlando Int'l",
-                    "locationID":"KMCO",
+                    "icaoCode":"KMCO",
                     "upNextBG":"orlando_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -874,7 +873,7 @@
                     "lat": "39.9526",
                     "lon": "-75.1652",
                     "obsName":"Philadelphia Int'l",
-                    "locationID":"KPHL",
+                    "icaoCode":"KPHL",
                     "upNextBG":"philadelphia_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -910,7 +909,7 @@
                     "lat": "33.4483",
                     "lon": "-112.0725",
                     "obsName":"Phoenix Int'l",
-                    "locationID":"KPHX",
+                    "icaoCode":"KPHX",
                     "upNextBG":"phoenix_bg",
                     "slidesBG":"core_southwest_bg",
                     "radar": {
@@ -945,7 +944,7 @@
                     "lat": "40.4387",
                     "lon": "-79.9972",
                     "obsName":"Pittsburgh Int'l",
-                    "locationID":"KPIT",
+                    "icaoCode":"KPIT",
                     "upNextBG":"pittsburgh_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -979,7 +978,7 @@
                     "lat": "45.5152",
                     "lon": "-122.6784",
                     "obsName":"Portland Int'l",
-                    "locationID":"KPDX",
+                    "icaoCode":"KPDX",
                     "upNextBG":"portland_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -1012,7 +1011,7 @@
                     "lat": "38.5781",
                     "lon": "-121.4944",
                     "obsName":"Sacramento Int'l",
-                    "locationID":"KSMF",
+                    "icaoCode":"KSMF",
                     "upNextBG":"sacramento_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -1046,7 +1045,7 @@
                     "lat": "32.7157",
                     "lon": "-117.1611",
                     "obsName":"San Diego Int'l",
-                    "locationID":"KSAN",
+                    "icaoCode":"KSAN",
                     "upNextBG":"san_diego_bg",
                     "slidesBG":"core_ocean_bg",
                     "radar": {
@@ -1076,7 +1075,7 @@
                     "lat": "37.7749",
                     "lon": "-122.4194",
                     "obsName":"San Francisco Int'l",
-                    "locationID":"KSFO",
+                    "icaoCode":"KSFO",
                     "upNextBG":"san_francisco_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -1110,7 +1109,7 @@
                     "lat": "47.6061",
                     "lon": "-122.3328",
                     "obsName":"Seattle Int'l",
-                    "locationID":"KSEA",
+                    "icaoCode":"KSEA",
                     "upNextBG":"seattle_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -1144,7 +1143,7 @@
                     "lat": "38.6274",
                     "lon": "-90.1982",
                     "obsName":"St. Louis Int'l",
-                    "locationID":"KSTL",
+                    "icaoCode":"KSTL",
                     "upNextBG":"stlouis_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -1181,7 +1180,7 @@
                     "lat": "27.9517",
                     "lon": "-82.4588",
                     "obsName":"Tampa Int'l",
-                    "locationID":"KTPA",
+                    "icaoCode":"KTPA",
                     "upNextBG":"tampa_bg",
                     "slidesBG":"core_ocean_bg",
                     "radar": {
@@ -1216,7 +1215,7 @@
                     "lat": "38.9072",
                     "lon": "-77.0369",
                     "obsName":"Washington DC",
-                    "locationID":"KIAD",
+                    "icaoCode":"KIAD",
                     "upNextBG":"washington_dc_bg",
                     "slidesBG":"core_bg",
                     "radar": {
@@ -1251,58 +1250,68 @@
             "cities": [
                 {
                   "locationName": "",
-                  "obsIcaoCode": ""
+                  "icaoCode": ""
                 },
                 {
                   "locationName": "",
-                  "obsIcaoCode": ""
+                  "icaoCode": ""
                 },
                 {
                   "locationName": "",
-                  "obsIcaoCode": ""
-                },
-                {
-                  "locationName": ".",
-                  "obsIcaoCode": ""
+                  "icaoCode": ""
                 },
                 {
                   "locationName": "",
-                  "obsIcaoCode": ""
+                  "icaoCode": ""
                 },
                 {
                   "locationName": "",
-                  "obsIcaoCode": ""
+                  "icaoCode": ""
                 },
                 {
                   "locationName": "",
-                  "obsIcaoCode": ""
+                  "icaoCode": ""
                 },
                 {
                   "locationName": "",
-                  "obsIcaoCode": ""
+                  "icaoCode": ""
+                },
+                {
+                  "locationName": "",
+                  "icaoCode": ""
                 }
             ]
         },
-        "upperDisplayCity": {
-            "enabled":false,
-            "locationName": "",
-            "lat": "",
-            "lon": "",
-            "airportName": "",
-            "obsIcaoCode": ""
-        },
         "traffic": {
-            "autoFind":true,
             "locationName": "",
             "lat": "",
             "lon": "",
             "mapIcons":{
-              "zoomOut":[],
-              "zoomIn":[]
+              "zoomOut":[
+                {"icon":"","topPos":"","leftPos":""},
+                {"icon":"","topPos":"","leftPos":""},
+                {"icon":"","topPos":"","leftPos":""},
+                {"icon":"","topPos":"","leftPos":""}
+              ],
+              "zoomIn":[
+                {"icon":"","topPos":"","leftPos":""},
+                {"icon":"","topPos":"","leftPos":""},
+                {"icon":"","topPos":"","leftPos":""},
+                {"icon":"","topPos":"","leftPos":""},
+                {"icon":"","topPos":"","leftPos":""}
+              ]
             },
             "zoomOut": 8.6,
             "zoomIn": 9.4,
-            "routes": []
+            "routes": [
+              {"from":"","fromStreet":"","to":"","toStreet":"","routeIcon":""},
+              {"from":"","fromStreet":"","to":"","toStreet":"","routeIcon":""},
+              {"from":"","fromStreet":"","to":"","toStreet":" ","routeIcon":""},
+
+              {"from":"","fromStreet":"","to":"","toStreet":"","routeIcon":""},
+              {"from":"","fromStreet":"","to":"","toStreet":"","routeIcon":""},
+              {"from":"","fromStreet":"","to":"","toStreet":"","routeIcon":""}
+            ]
         },
         "travel": {
           "regionalMap":{ 
@@ -1310,26 +1319,18 @@
             "autoFind":true,
             "mapTop":"-1010",
             "mapLeft":"-4971",
-            "cities": [
-              {"locationName": "Binghamton", "lat": "42.09889", "lon":"-75.91083", "topPos":"240","leftPos":"570"},
-              {"locationName": "Boston", "lat": "42.361145", "lon":"-71.057083", "topPos":"240","leftPos":"1125"},
-              {"locationName": "New York", "lat": "40.730610", "lon":"-73.935242", "topPos":"361","leftPos":"859"},
-              {"locationName": "Pittsburgh", "lat": "40.440624", "lon":"-79.995888", "topPos":"439","leftPos":"265"},
-              {"locationName": "Philadelphia", "lat": "39.95233", "lon":"-75.16379", "topPos":"507","leftPos":"661"},
-              {"locationName": " Charleston", "lat": "38.349819", "lon":"-81.632622", "topPos":"664","leftPos":"136"},
-              {"locationName": "Washington", "lat": "38.889805", "lon":"-77.03637", "topPos":"654","leftPos":"483"}
-            ]
+            "cities": []
           },
           "destinationForecast": [
-            {"locationName":"New York City","lat":"40.730610","lon":"-73.935242"},
-            {"locationName":"Chicago","lat":"41.881832","lon":"-87.623177"},
-            {"locationName":"Los Angeles","lat":"34.052235","lon":"-118.243683"},
-            {"locationName":"Atlanta","lat":"33.753746","lon":"-84.386330"},
-            {"locationName":"Dallas","lat":"32.779167","lon":"-96.808891"},
-            {"locationName":"Boston","lat":"42.361145","lon":"-71.057083"},
-            {"locationName":"Orlando","lat":"28.538336","lon":"-81.379234"},
-            {"locationName":"Washington, DC","lat":"38.889805","lon":"-77.009056"},
-            {"locationName":"San Francisco","lat":"37.773972","lon":"-122.431297"}
+            {"locationName":"New York City","locationID":"USNY0998:1:US"},
+            {"locationName":"Chicago","locationID":"USIL0228:1:US"},
+            {"locationName":"Los Angeles","locationID":"USCA0090:1:US"},
+            {"locationName":"Atlanta","locationID":"USGA0028:1:US"},
+            {"locationName":"Dallas","locationID":"USTX0327:1:US"},
+            {"locationName":"Boston","locationID":"USMA0046:1:US"},
+            {"locationName":"Orlando","locationID":"USFL0372:1:US"},
+            {"locationName":"Washington, DC","locationID":"USDC0001:1:US"},
+            {"locationName":"San Francisco","locationID":"USCA0987:1:US"}
           ]
         },
         "health": {
@@ -1337,8 +1338,8 @@
           "locationName": "",
           "lat": "",
           "lon": "",
-          "airportName": "",
-          "obsIcaoCode": ""
+          "obsName": "",
+          "icaoCode": ""
         },
         "airport": {
           "autoFind":true,
@@ -1366,140 +1367,145 @@
         "international": {
           "map": {
             "canada": [
-              {"locationName":"Dawson","lat":"64.0639","lon":"-139.4333"},
-              {"locationName":"Yellowknife","lat":"62.4540","lon":"-114.3718"},
-              {"locationName":"Churchill","lat":"58.7679","lon":"-94.1696"},
-              {"locationName":"Churchill Falls","lat":"53.5317","lon":"-64.0064"},
-              {"locationName":"Vancouver","lat":"49.2827","lon":"-123.1207"},
-              {"locationName":"Edmonton","lat":"53.5461","lon":"-113.4937"},
-              {"locationName":"Winnipeg","lat":"49.8954","lon":"-97.1385"},
-              {"locationName":"Montreal","lat":"45.5019","lon":"-73.5674"}
+              {"locationName":"Dawson","locationID":"CAXX0109:1:CA"},
+              {"locationName":"  Yellowknife","locationID":"CAXX0557:1:CA"},
+              {"locationName":"Churchill","locationID":"CAXX0078:1:CA"},
+              {"locationName":"Churchill Falls","locationID":"CAXX0574:1:CA"},
+              {"locationName":"Vancouver","locationID":"CAXX0518:1:CA"},
+              {"locationName":"Edmonton","locationID":"CAXX0126:1:CA"},
+              {"locationName":"Winnipeg","locationID":"CAXX0547:1:CA"},
+              {"locationName":"Montreal","locationID":"CAXX0301:1:CA"}
             ],
             "mexico": [
-              {"locationName":"Guaymas","lat":"27.9111","lon":"-110.9091"},
-              {"locationName":"Monterrey","lat":"25.6866","lon":"-100.3161"},
-              {"locationName":"La Paz","lat":"24.1426","lon":"-110.3128"},
-              {"locationName":"Mexico City","lat":"19.4326","lon":"-99.1332"},
-              {"locationName":"Cancun","lat":"21.1619","lon":"-86.8515"}
+              {"locationName":"Guaymas","locationID":"MXSR0019:1:MX"},
+              {"locationName":"Monterrey","locationID":"MXNL0068:1:MX"},
+              {"locationName":"La Paz","locationID":"MXMO0826:1:MX"},
+              {"locationName":"Mexico City","locationID":"MXDF0021:1:MX"},
+              {"locationName":"Cancun","locationID":"MXQR0112:1:MX"}
             ],
             "caribbean": [
-              {"locationName":"Nassau","lat":"25.0443","lon":"-77.3504"},
-              {"locationName":"Cancun","lat":"21.1619","lon":"-86.8515"},
-              {"locationName":"Kingston","lat":"18.0179","lon":"-76.8099"},
-              {"locationName":"San Juan","lat":"18.4153","lon":"-66.0594"},
-              {"locationName":"Tegucigalpa","lat":"14.0607","lon":"-87.1825"},
-              {"locationName":"Aruba","lat":"12.5211","lon":"-69.9683"}
+              {"locationName":"Nassau","locationID":"BFXX0005:1:BF"},
+              {"locationName":"Cancun","locationID":"MXQR0112:1:MX"},
+              {"locationName":"Kingston","locationID":"JMXX0002:1:JM"},
+              {"locationName":"San Juan","locationID":"USPR0062:1:US"},
+              {"locationName":"Tegucigalpa","locationID":"19019:25:HO"},
+              {"locationName":"Aruba","locationID":"AAXX0002:1:AA"}
             ],
             "southamerica": [
-              {"locationName":"Manaus","lat":"-3.1190","lon":"-60.0217"},
-              {"locationName":"Recife","lat":"-8.0578","lon":"-34.8829"},
-              {"locationName":"Lima","lat":"-12.0467","lon":"-77.0431"},
-              {"locationName":"Brasilia","lat":"-15.7975","lon":"-47.8919"},
-              {"locationName":"Santiago","lat":"-33.4489","lon":"-70.6693"},
-              {"locationName":"Buenos Aires","lat":"-34.6037","lon":"-58.3821"}
+              {"locationName":"Manaus","locationID":"BRXX0717:1:BR"},
+              {"locationName":"Recife","locationID":"BRXX0554:1:BR"},
+              {"locationName":"Lima","locationID":"PEXX0003:1:PE"},
+              {"locationName":"Brasilia","locationID":"BRXX0043:1:BR"},
+              {"locationName":"Santiago","locationID":"CIXX3066:1:CI"},
+              {"locationName":"Buenos Aires","locationID":"ARXX1012:1:AR"}
             ],
             "britain": [
-              {"locationName":"Edinburgh","lat":"55.9533","lon":"-3.1883"},
-              {"locationName":"Dublin","lat":"53.3498","lon":"-6.2603"},
-              {"locationName":"Manchester","lat":"53.4808","lon":"-2.2426"},
-              {"locationName":"Cork","lat":"51.8985","lon":"-8.4756"},
-              {"locationName":"London","lat":"51.5072","lon":"-0.1276"}
+              {"locationName":"Edinburgh","locationID":"UKXX0800:1:UK"},
+              {"locationName":"Dublin","locationID":"EIXX0014:1:EI"},
+              {"locationName":"Manchester","locationID":"UKXX1382:1:UK"},
+              {"locationName":"Cork","locationID":"EIXX0011:1:EI"},
+              {"locationName":"London","locationID":"UKXX1822:1:UK"}
             ],
             "europe": [
-              {"locationName":"London","lat":"51.5072","lon":"-0.1276"},
-              {"locationName":"Berlin","lat":"52.5200","lon":"13.4050"},
-              {"locationName":"Moscow","lat":"55.7569","lon":"37.6151"},
-              {"locationName":"Paris","lat":"48.8575","lon":"2.3514"},
-              {"locationName":"Budapest","lat":"47.4979","lon":"19.0402"},
-              {"locationName":"Madrid","lat":"40.4167","lon":"-3.7033"},
-              {"locationName":"Rome","lat":"41.8967","lon":"12.4822"},
-              {"locationName":"Istanbul","lat":"41.0082","lon":"28.9784"}
+              {"locationName":"London","locationID":"UKXX1822:1:UK"},
+              {"locationName":"Berlin","locationID":"GMXX2985:1:GM"},
+              {"locationName":"Moscow","locationID":"RSXX0065:1:RS"},
+              {"locationName":"Paris","locationID":"FRXX0007:1:FR"},
+              {"locationName":"Budapest","locationID":"HUXX0016:1:HU"},
+              {"locationName":"Madrid","locationID":"SPXX0005:1:SP"},
+              {"locationName":"Rome","locationID":"ITXX0021:1:IT"},
+              {"locationName":"Istanbul","locationID":"TUXX0024:1:TU"}
             ],
             "africa": [
-              {"locationName":"Dakar","lat":"14.7167","lon":"-17.4677"},
-              {"locationName":"Abuja","lat":"9.0563","lon":"7.4985"},
-              {"locationName":"Cairo","lat":"30.0444","lon":"31.2357"},
-              {"locationName":"Riyadh","lat":"24.7136","lon":"46.6753"},
-              {"locationName":"Nairobi","lat":"-1.2921","lon":"36.8219"},
-              {"locationName":"Luanda","lat":"-8.8147","lon":"13.2302"},
-              {"locationName":"Maputo","lat":"-25.9692","lon":"32.5732"}
+              {"locationName":"Dakar","locationID":"22049:25:SG"},
+              {"locationName":"Abuja","locationID":"NIXX0195:1:NI"},
+              {"locationName":"Cairo","locationID":"EGXX2875:1:EG"},
+              {"locationName":"Riyadh","locationID":"SAXX0018:1:SA"},
+              {"locationName":"Nairobi","locationID":"KEXX3769:1:KE"},
+              {"locationName":"Luanda","locationID":"AOXX0009:1:AO"},
+              {"locationName":"Maputo","locationID":"MZXX0003:1:MZ"}
             ],
             "india": [
-              {"locationName":"Karachi","lat":"24.8607","lon":"67.0011"},
-              {"locationName":"New Delhi","lat":"28.6139","lon":"77.2088"},
-              {"locationName":"Calcutta","lat":"22.5744","lon":"88.3629"},
-              {"locationName":"Bombay","lat":"18.9582","lon":"72.8321"},
-              {"locationName":"Madras","lat":"13.0843","lon":"80.2705"},
-              {"locationName":"Yangon","lat":"16.8409","lon":"96.1735"}
+              {"locationName":"Karachi","locationID":"PKXX2599:1:PK"},
+              {"locationName":"New Delhi","locationID":"INXX0096:1:IN"},
+              {"locationName":"Calcutta","locationID":"INXX0028:1:IN"},
+              {"locationName":"Bombay","locationID":"INXX0087:1:IN"},
+              {"locationName":"Madras","locationID":"INXX0202:1:IN"},
+              {"locationName":"Yangon","locationID":"BMXX0004:1:BM"}
             ],
             "eastasia":[
-              {"locationName":"Beijing","lat":"39.9042","lon":"116.4074"},
-              {"locationName":"Seoul","lat":"37.5503","lon":"126.9971"},
-              {"locationName":"Tokyo","lat":"35.6764","lon":"139.6500"},
-              {"locationName":"Chongqing","lat":"29.5657","lon":"106.5512"},
-              {"locationName":"Shanghai","lat":"31.2304","lon":"121.4737"},
-              {"locationName":"Guangzhou","lat":"23.1291","lon":"113.2644"}
+              {"locationName":"Beijing","locationID":"CHXX0012:1:CH"},
+              {"locationName":"Seoul","locationID":"KSXX6909:1:KS"},
+              {"locationName":"Tokyo","locationID":"JAXX0111:1:JA"},
+              {"locationName":"Chongqing","locationID":"CHXX1544:1:CH"},
+              {"locationName":"Shanghai","locationID":"CHXX1063:1:CH"},
+              {"locationName":"Guangzhou","locationID":"CHXX2259:1:CH"}
             ],
             "oceania": [
-              {"locationName":"Singapore","lat":"1.3521","lon":"103.8198"},
-              {"locationName":"Davao","lat":"7.0647","lon":"125.6088"},
-              {"locationName":"Moresby","lat":"-9.4790","lon":"147.1494"},
-              {"locationName":"Suva/Fiji","lat":"-18.1266","lon":"178.4399"},
-              {"locationName":"Alice Springs","lat":"-23.6980","lon":"133.8807"},
-              {"locationName":"Perth","lat":"-31.9514","lon":"115.8617"},
-              {"locationName":"Sydney","lat":"-33.8727","lon":"151.2057"}
+              {"locationName":"Singapore","locationID":"SNXX0149:1:SN"},
+              {"locationName":"Davao","locationID":"RPXX0830:1:RP"},
+              {"locationName":"Moresby","locationID":"PPXX6688:1:PP"},
+              {"locationName":"Suva/Fiji","locationID":"FJXX0093:1:FJ"},
+              {"locationName":"Alice Springs","locationID":"ASXX0002:1:AS"},
+              {"locationName":"Perth","locationID":"ASXX0089:1:AS"},
+              {"locationName":"Sydney","locationID":"ASXX0112:1:AS"}
             ],
             "australia": [
-              {"locationName":"Port Hedland","lat":"-20.3111","lon":"118.6094"},
-              {"locationName":"Townsville","lat":"-19.2599","lon":"146.8137"},
-              {"locationName":"Alice Springs","lat":"-23.6980","lon":"133.8807"},
-              {"locationName":"Sydney","lat":"-33.8727","lon":"151.2057"},
-              {"locationName":"Bunbury","lat":"-33.3270","lon":"115.6408"},
-              {"locationName":"Melbourne","lat":"-37.8136","lon":"144.9631"}
+              {"locationName":"Port Hedland","locationID":"ASXX0092:1:AS"},
+              {"locationName":"Townsville","locationID":"ASXX6680:1:AS"},
+              {"locationName":"Alice Springs","locationID":"ASXX0002:1:AS"},
+              {"locationName":"Sydney","locationID":"ASXX0112:1:AS"},
+              {"locationName":"Bunbury","locationID":"ASXX0228:1:AS"},
+              {"locationName":"Melbourne","locationID":"ASXX1157:1:AS"}
             ]
           },
           "forecast": [
-            {"locationName":"Toronto","lat":"43.6532","lon":"-79.3832"},
-            {"locationName":"London","lat":"51.5072","lon":"-0.1276"},
-            {"locationName":"Paris","lat":"48.8575","lon":"2.3514"},
-            {"locationName":"Cancun","lat":"21.1619","lon":"-86.8515"},
-            {"locationName":"Tokyo","lat":"35.6764","lon":"139.6500"},
-            {"locationName":"Sydney","lat":"-33.8727","lon":"151.2057"},
-            {"locationName":"Rome","lat":"41.8967","lon":"12.4822"},
-            {"locationName":"Vancouver","lat":"49.2827","lon":"-123.1207"},
-            {"locationName":"Hong Kong","lat":"22.3193","lon":"114.1694"},
-            {"locationName":"Nassau","lat":"25.0443","lon":"-77.3504"},
-            {"locationName":"Amsterdam","lat":"52.3676","lon":"4.9041"},
-            {"locationName":"Buenos Aires","lat":"-34.6037","lon":"-58.3821"}
+            {"locationName":"Toronto","locationID":"CAXX0504:1:CA"},
+            {"locationName":"London","locationID":"UKXX1822:1:UK"},
+            {"locationName":"Paris","locationID":"FRXX0007:1:FR"},
+            {"locationName":"Cancun","locationID":"MXQR0112:1:MX"},
+            {"locationName":"Tokyo","locationID":"JAXX0111:1:JA"},
+            {"locationName":"Sydney","locationID":"ASXX0112:1:AS"},
+            {"locationName":"Rome","locationID":"ITXX0021:1:IT"},
+            {"locationName":"Vancouver","locationID":"CAXX0518:1:CA"},
+            {"locationName":"Hong Kong","locationID":"HKXX0049:1:HK"},
+            {"locationName":"Nassau","locationID":"BFXX0005:1:BF"},
+            {"locationName":"Amsterdam","locationID":"NLXX0313:1:NL"},
+            {"locationName":"Buenos Aires","locationID":"ARXX1012:1:AR"}
           ]
         },
         "golf": {
           "autoFind":true,
           "teeTime": {
            "locationName": "",
-           "lat": "",
-           "lon": ""
+           "locationID":""
           },
           "indexMap": [],
-          "courses": []
+          "courses": [
+            {"courseName":"", "locationID":""},
+            {"courseName":"", "locationID":""},
+            {"courseName":"", "locationID":""}
+          ]
         },
         "garden": {
           "autoFind":true,
           "locationName": "",
-          "lat": "",
-          "lon": ""
+          "locationID":""
         },
         "ski": {
           "resorts": [
-            {"displayName":"Belleayre Mountain", "state":"NY", "resortId":"914001"},
-            {"displayName":"Brantling Ski Slopes", "state":"NY", "resortId":"315001"},
-            {"displayName":"Bristol Mountain", "state":"NY", "resortId":"716001"},
-            {"displayName":"Dry Hill Ski Area", "state":"NY", "resortId":"315011"},
-            {"displayName":"Gore Mountain", "state":"NY", "resortId":"518005"},
-            {"displayName":"Holiday Mountain", "state":"NY", "resortId":"914003"},
-            {"displayName":"Kissing Bridge", "state":"NY", "resortId":"716004"},
-            {"displayName":"Labrador Mountain", "state":"NY", "resortId":"607002"},
-            {"displayName":"Royal Mountain", "state":"NY", "resortId":"518017"}
+            { "displayName": "Snowshow Mountain", "state": "WV", "resortId": "304001" },
+            { "displayName": "Baker Mountain", "state": "ME", "resortId": "207024" },
+            { "displayName": "Bolton Valley Resort", "state": "VT", "resortId": "802002" },
+            { "displayName": "Berkshire East Ski Resort", "state": "MA", "resortId": "413001" },
+            { "displayName": "Bear Creek Ski Resort", "state": "PA", "resortId": "215003" },
+            { "displayName": "Arrowhead Ski Area", "state": "NH", "resortId": "603031" },
+            { "displayName": "Big Bear Mtn. Resort", "state": "CA", "resortId": "909002" },
+            { "displayName": "Arapahoe Basin", "state": "CO", "resortId": "303001" },
+            { "displayName": "Beaver Mountain", "state": "UT", "resortId": "801002" },
+            { "displayName": "Bristol Mountain", "state": "NY", "resortId": "716001" },
+            { "displayName": "Grand Targhee Resort", "state": "WY", "resortId": "307002" },
+            { "displayName": "Aspen Highlands", "state": "CO", "resortId": "303004" }
           ]
         },
         "beach": {
@@ -1508,8 +1514,6 @@
             "displayName":""
           },
           "coastalForecast": {
-            "lat":"",
-            "lon":"",
             "office":"",
             "zone":"",
             "zoneName":""
