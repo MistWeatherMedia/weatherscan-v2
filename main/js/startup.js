@@ -93,10 +93,6 @@ async function startSystem() {
     startupAnimations()
   }, 3000);
 
-  audioPlayer = new AudioManager();
-  audioPlayer.initializeAudio()
-  audioPlayer.startPlaying(audioPlayer.playlist, true);
-
   const logo = document.getElementsByClassName("intellistarlogo")[0];
 
 // accumulated rotation (radians)
@@ -141,6 +137,10 @@ requestAnimationFrame(animate);
     $("#startup .locationname").text(`location name: ${systemSettings.systemLocation}`);
     $("#startup .affiliatename").text(`affiliate name: ${systemSettings.appearanceSettings.providerName}`);
     
+    audioPlayer = new AudioManager();
+    audioPlayer.initializeAudio()
+    audioPlayer.startPlaying(audioPlayer.playlist, true);
+
     await locationJS()
 
     setBackground()

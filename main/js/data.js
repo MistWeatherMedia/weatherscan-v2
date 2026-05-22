@@ -380,9 +380,8 @@ async function getCoreData() {
       warnings:[]
     }
 
+    var array = [];
     if (data && data.alerts) {
-      var array = [];
-
       for (var i = 0; i < data.alerts.length; i++) {
         var eventDesc = data.alerts[i].eventDescription;
 
@@ -742,9 +741,8 @@ function getExtraCore(locNum) {
       warnings:[]
     }
 
+    var array = [];
     if (data && data.alerts) {
-      var promises = [];
-
       for (var i = 0; i < data.alerts.length; i++) {
         var eventDesc = data.alerts[i].eventDescription;
         
