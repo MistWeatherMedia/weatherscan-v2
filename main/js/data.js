@@ -2604,7 +2604,7 @@ async function allData() {
   //initializeRadar(locradar)
   //initializeRadar(satradar)
   //initializeRadar(regradar)
-  console.log("weatherData data.js", weatherData)
+  //console.log("weatherData data.js", weatherData)
   //}, 5000);
 }
 async function startPrograms() {

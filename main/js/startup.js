@@ -211,7 +211,7 @@ requestAnimationFrame(animate);
         lBarData.cities[i].currentConditions.noReport = true
       }
     }
-    console.log(lBarData)
+    console.log("Lbar data", lBarData)
 
     try {
       await getTickerData()
@@ -224,9 +224,8 @@ requestAnimationFrame(animate);
       localTickerData.cities.forecast.cities = []
       localTickerData.travelCities.current.cities = []
       localTickerData.travelCities.forecast.cities = []
-
-      console.log(localTickerData)
     }
+    console.log("ticker data", localTickerData)
 
     try {
       await checkWarningCrawl()
@@ -235,6 +234,8 @@ requestAnimationFrame(animate);
       weatherData.crawlAlerts = { locationname: systemSettings.mainCity.locationName, warnings: [] };
       weatherData.severemode = false;
     }
+
+    console.log("warning crawl data", weatherData.crawlAlerts)
 
     startPrograms()
 }
