@@ -192,9 +192,6 @@ requestAnimationFrame(animate);
       slideSettings.order[1].slideLineup.push(packageLibrary[systemSettings.severePackageSettings[i]])
     }
 
-    //initLocDataHeaders()
-    //console.log("locationDataHeaders", locationDataHeaders)
-
     //all starting data calls
     console.log("systemSettings", systemSettings)
 
@@ -227,6 +224,7 @@ requestAnimationFrame(animate);
       localTickerData.cities.forecast.cities = []
       localTickerData.travelCities.current.cities = []
       localTickerData.travelCities.forecast.cities = []
+
       console.log(localTickerData)
     }
 

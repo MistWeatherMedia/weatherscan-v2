@@ -73,7 +73,7 @@
                 "lat":"",
                 "lon":"",
                 "obsName":"",
-                "locationID":""
+                "icaoCode":""
               }
             ]
           },

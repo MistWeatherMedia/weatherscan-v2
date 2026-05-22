@@ -342,7 +342,7 @@ img#mist-logo {
   background: url(images/backgrounds/wxscan_default_bg.png);
   background-size: 100% 100%;
   
-}
+}/*
 #mainreference {
   position: absolute;
   width: 1620px;
@@ -353,7 +353,7 @@ img#mist-logo {
   z-index: 0;
   opacity: 0;
 }
-#mainreference6 {/*if using 6*/
+#mainreference6 {/*if using 6*//*
     position: absolute;
     width: 1584px;
     left: 10px;
@@ -364,7 +364,7 @@ img#mist-logo {
     image-rendering: pixelated;
     z-index: 0;
     opacity: 1;
-}
+}*/
 /*LBAR*/
 .lbar-location {
     position: absolute;

@@ -578,7 +578,7 @@ async function locationJS() {
             lat: systemSettings.mainCity.lat,
             lon: systemSettings.mainCity.lon,
             obsName: systemSettings.mainCity.obsName,
-            locationID: systemSettings.mainCity.locationID
+            icaoCode: systemSettings.mainCity.icaoCode
         }
     }
     //lbar radar
@@ -591,6 +591,7 @@ async function locationJS() {
     if (systemSettings.LBar.ccTicker.autoFind == true) {
         await getLBarCC()
     }
+
     //datamaps
     if (systemSettings.dataMaps.auto == true) {
         await centerDataMaps(systemSettings.mainCity.lat, systemSettings.mainCity.lon);
@@ -689,4 +690,12 @@ async function locationJS() {
     }
 
     systemSettings.garden.header = await getCoordsLocID(systemSettings.garden.locationID)
+
+    for (var i = 0; i < systemSettings.LBar.ccTicker.cities.length; i++) {
+        systemSettings.LBar.ccTicker.cities[i].header = await getCoordsLocID(systemSettings.LBar.ccTicker.cities[i].locationID)
+    }
+
+    for (var i = 0; i < systemSettings.LBar.ccTicker.travelCities.length; i++) {
+        systemSettings.LBar.ccTicker.travelCities[i].header = await getCoordsLocID(systemSettings.LBar.ccTicker.travelCities[i].locationID)
+    }
 }

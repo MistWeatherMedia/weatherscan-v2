@@ -39,9 +39,12 @@ var currentCC
 var currentCCInterval
 function getlBarData(lbarLoc) {
   lBarData.cities[lbarLoc] = emptyLBarData();
-  function ccLBAR() {
-    var url = "https://api.weather.com/v3/wx/observations/current?" + locationDataHeaders.LBarData.current[lbarLoc] + "&units=e&language=en-US&format=json&apiKey=" + api_key
-    $.getJSON(url, function(data) {
+  async function ccLBAR() {
+    var url = "https://api.weather.com/v3/wx/observations/current?icaoCode=" + systemSettings.LBar.locations.cities[lbarLoc].icaoCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
+
+    const data = await $.getJSON(url);
+
+    try {
       lBarData.cities[lbarLoc].currentConditions.noReport = false
       lBarData.cities[lbarLoc].currentConditions.icon = data.iconCodeExtend
       lBarData.cities[lbarLoc].currentConditions.temperature = data.temperature
@@ -56,15 +59,19 @@ function getlBarData(lbarLoc) {
       lBarData.cities[lbarLoc].currentConditions.uvIndex = data.uvIndex = data.uvDescription
       lBarData.cities[lbarLoc].currentConditions.gusts = data.windGust == undefined ? "none" : data.windGust + " mph"
       lBarData.cities[lbarLoc].currentConditions.feelslike = data.temperatureFeelsLike == data.temperature ? "none" : (data.temperature > 65 ? "heat index " + data.temperatureFeelsLike + "°" : "wind chill " + data.temperatureFeelsLike + "°")
-    }).fail(function() {
+    } catch (error) {
+      console.error(error)
+      
       lBarData.cities[lbarLoc].currentConditions.noReport = true
-    })
-    console.log("LBar data current obs", lBarData.cities[lbarLoc].currentConditions)
+    }
   }
   ccLBAR()
-  function fcstLBAR() {
-    var url = "https://api.weather.com/v3/wx/forecast/daily/5day?" + locationDataHeaders.LBarData.forecast[lbarLoc] + "&format=json&units=e&language=en-US&apiKey=" + api_key
-    $.getJSON(url, function(data) {
+  async function fcstLBAR() {
+    var url = "https://api.weather.com/v3/wx/forecast/daily/5day?geocode=" + systemSettings.LBar.locations.cities[lbarLoc].lat + "," + systemSettings.LBar.locations.cities[lbarLoc].lon + "&format=json&units=e&language=en-US&apiKey=" + api_key
+
+    const data = await $.getJSON(url);
+
+    try {
       var today = longWeekDays[new Date().getDay()] 
       lBarData.cities[lbarLoc].forecast.noReport = false;
       lBarData.cities[lbarLoc].forecast.extendedForecast.noReport = false;
@@ -89,15 +96,17 @@ function getlBarData(lbarLoc) {
         lBarData.cities[lbarLoc].forecast.localForecast.days[j].day = data.daypart[0].daypartName[ji].toUpperCase() == "TOMORROW" ? data.dayOfWeek[j].toUpperCase() : data.daypart[0].daypartName[ji].toUpperCase();
         lBarData.cities[lbarLoc].forecast.localForecast.days[j].desc = buildShortcast(data.daypart[0].narrative[ji], data.daypart[0].iconCodeExtend[ji], data.daypart[0].windPhrase[ji]);
       }
-    }).fail(function() {
+    } catch (error) {
+      console.error(error)
+      
       lBarData.cities[lbarLoc].forecast.noReport = true;
       lBarData.cities[lbarLoc].forecast.extendedForecast.noReport = true;
       lBarData.cities[lbarLoc].forecast.localForecast.noReport = true;
-    })
+    }
   }
   fcstLBAR()
-  function dpartLBAR(){
-    var url = "https://api.weather.com/v3/wx/forecast/hourly/2day?" + locationDataHeaders.LBarData.forecast[lbarLoc] + "&format=json&units=e&language=en-US&apiKey=" + api_key
+  async function dpartLBAR(){
+    var url = "https://api.weather.com/v3/wx/forecast/hourly/2day?geocode=" + systemSettings.LBar.locations.cities[lbarLoc].lat + "," + systemSettings.LBar.locations.cities[lbarLoc].lon + "&format=json&units=e&language=en-US&apiKey=" + api_key
     var dpHours = [];
     var dayOfWeek = {
         0: ["SUNDAY'S FORECAST", "SUN NIGHT/MON", "MONDAY'S FORECAST"], 1: ["MONDAY'S FORECAST", "MON NIGHT/TUE", "TUESDAY'S FORECAST"], 2: ["TUESDAY'S FORECAST", "TUE NIGHT/WED", "WEDNESDAY'S FORECAST"], 3: ["WEDNESDAY'S FORECAST", "WED NIGHT/THU", "THURSDAY'S FORECAST"],
@@ -136,8 +145,10 @@ function getlBarData(lbarLoc) {
         lBarData.cities[lbarLoc].forecast.dayPart.dayName = dayOfWeek[new Date().getDay()][2];
         dpHours = [6, 12, 15, 17];
     }
-    $.getJSON(url, function(data){
-      //console.log(data);
+
+    const data = await $.getJSON(url);
+
+    try {
       lBarData.cities[lbarLoc].forecast.dayPart.noReport = false;
       var dpidx = 0;
       for(let i = 0; i < data.validTimeLocal.length; i++){
@@ -149,16 +160,21 @@ function getlBarData(lbarLoc) {
           dpidx++;
         }
       }
-    }).fail(function(){
+    } catch (error) {
+      console.error(error)
+      
       lBarData.cities[lbarLoc].forecast.dayPart.noReport = true;
-    })
+    }
   }
   dpartLBAR();
 }
 function getTickerData(){
-  function getAirportDelays() {
+  async function getAirportDelays() {
     localTickerData.airport.airportDelays = []//https://nasstatus.faa.gov/api/airport-events
-    $.getJSON("/airports", function(eventdata) {
+
+    const eventdata = await $.getJSON("/airports")
+
+    try {
       for (const airportevent of eventdata) {
         var delay = {iataCode:"", departureDelay:0,closed:false}
         delay.iataCode = airportevent.airportId
@@ -200,16 +216,21 @@ function getTickerData(){
           }
         }
       }*/
-    }).fail(function() {
+    } catch (error) {
+      console.error(error)
+
       localTickerData.airport.airportDelays = []
-    })
+    }
   }
   getAirportDelays()
   //airports
-  function ccTickerArpt(num) {
+  async function ccTickerArpt(num) {
     var airportCC = {airportName:"",cond:"",temp:"",delay:""};
     var url = "https://api.weather.com/v3/wx/observations/current?iataCode=" + systemSettings.LBar.ccTicker.airports[num].iataCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
-    $.getJSON(url, function(data){
+
+    const data = await $.getJSON(url);
+
+    try {
       //console.log(data);
       //localTickerData.airport.noReport = false;
       airportCC.airportName =systemSettings.LBar.ccTicker.airports[num].airportName
@@ -218,40 +239,44 @@ function getTickerData(){
       airportCC.delay = getTickerDelay(systemSettings.LBar.ccTicker.airports[num].iataCode) //get delays
       
       localTickerData.airport.airports[num] = airportCC;
-    }).fail(function(){
+    } catch (error) {
+      console.error(error)
+      
       airportCC.airportName = systemSettings.LBar.ccTicker.airports[num].airportName
       airportCC.cond = ""
       airportCC.temp = ""
       airportCC.delay = ""
       
       localTickerData.airport.airports[num] = airportCC;
-    })
-  }
-  setTimeout(function() {
-    for(let i = 0; i < systemSettings.LBar.ccTicker.airports.length; i++){
-      ccTickerArpt(i)
     }
-  }, 500)
-  function otherTickerObs(type){
+  }
+
+  for(let i = 0; i < systemSettings.LBar.ccTicker.airports.length; i++){
+    ccTickerArpt(i)
+  }
+
+  async function otherTickerObs(type){
     var tunnel;
     var htunnel;
     if(type == "cities"){
-      htunnel = locationDataHeaders.ccTickerData.cities;
       tunnel = systemSettings.LBar.ccTicker.cities;
     }else if(type == "travel"){
       tunnel = systemSettings.LBar.ccTicker.travelCities;
-      htunnel = locationDataHeaders.ccTickerData.travelCities
     }else{
-      throw new Error("Ticker type is undefined.");
+      console.error("Ticker type is undefined.");
     }
     //console.log(tunnel);
     //console.log(tunnel == systemSettings.LBar.ccTicker.cities);
     //console.log(tunnel == systemSettings.LBar.ccTicker.travelCities);
   //cc
+  
   for(let j = 0; j < tunnel.length; j++){
     var locationTickerCC = {locationName:"",cond:"",temp:""};
-    var url = "https://api.weather.com/v3/wx/observations/current?" + htunnel.current[j] + "&units=e&language=en-US&format=json&apiKey=" + api_key
-    $.getJSON(url, function(data){
+    var url = "https://api.weather.com/v3/wx/observations/current?geocode=" + tunnel[j].header + "&units=e&language=en-US&format=json&apiKey=" + api_key
+    
+    const data = await $.getJSON(url)
+
+    try {
       //console.log(data);
       if(type == "cities"){
         //localTickerData.cities.current.noReport = false;
@@ -269,7 +294,9 @@ function getTickerData(){
         localTickerData.travelCities.current.cities[j] = locationTickerCC;
       }
       //console.log(locationTickerCC);
-    }).fail(function(){
+    } catch (error) {
+      console.error(error)
+      
       locationTickerCC = {
         locationName: tunnel[j].locationName,
         cond: "",
@@ -282,13 +309,16 @@ function getTickerData(){
         localTickerData.travelCities.current.cities[j] = locationTickerCC;
         //localTickerData.travelCities.current.noReport = true;
       }
-    })
+    }
   }
   //fc
   var dayTime = new Date()
   for(let k = 0; k < tunnel.length; k++){
-    var url = "https://api.weather.com/v3/wx/forecast/daily/3day?" + htunnel.forecast[k] + "&format=json&units=e&language=en-US&apiKey=" + api_key
-    $.getJSON(url, function(data){
+    var url = "https://api.weather.com/v3/wx/forecast/daily/3day?geocode=" + tunnel[k].header + "&format=json&units=e&language=en-US&apiKey=" + api_key
+
+    const data = await $.getJSON(url);
+
+    try {
       //console.log(tunnel[k].locationName, data);
       if(type == "cities"){
         //localTickerData.cities.forecast.noReport = false;
@@ -315,7 +345,9 @@ function getTickerData(){
         localTickerData.travelCities.forecast.cities[k] = locationTickerFC;
       }
       //console.log(locationTickerFC);
-    }).fail(function(){
+    } catch (error) {
+      console.error(error)
+      
       locationTickerFC = {
         locationName: tunnel[k].locationName,
         cond: "",
@@ -328,20 +360,16 @@ function getTickerData(){
         localTickerData.travelCities.forecast.cities[k] = locationTickerFC;
         //localTickerData.travelCities.forecast.noReport = true;
       }
-    })
+    }
   }
   }
   otherTickerObs("cities");
   otherTickerObs("travel");
-
-  setTimeout(() => {
-    console.log(localTickerData);
-  }, 2000);
 }
 
 function sideBarLoop(idx) {
   LBarSlideSettings = []
-  console.log("orderidx", orderidx)
+  
   if (orderidx == 0) {
   var sideBarFunctions = {
   condition() {$(".obs-lbar .obs-ticker").html(lBarData.cities[lbarLocId].currentConditions.condition); currentCCInterval = setTimeout(() => {sidx++; showCC()}, 6000)},
@@ -512,9 +540,11 @@ function forecastBarLoop(idx){
       $("#lbar .daypart-lbar .temp").css("bottom", "208.25px")
       $("#lbar .daypart-lbar .tempbar").css("height", "0px")
       var divs = [".one", ".two", ".three", ".four"]
-      $('#lbar .daypart-lbar').fadeIn(0);
       $("#lbar .daypart-lbar .timestamp").empty();
+      $('#lbar .daypart-lbar').fadeIn(0);
       if(lBarData.cities[lbarLocId].forecast.dayPart.noReport != true){
+        $("#lbar .lbar-tempunavailable").fadeOut(0);
+        $('#lbar .daypart-lbar .section').fadeIn(0);
         $("#lbar .daypart-lbar .timestamp").append(`${systemSettings.LBar.locations.cities[lbarLocId].locationName.toUpperCase()}: &nbsp; <em>${lBarData.cities[lbarLocId].forecast.dayPart.dayName}</em>`);
         var barTemps = []
         var barHeights = []
@@ -538,6 +568,10 @@ function forecastBarLoop(idx){
         setTimeout(() => {
           $("#lbar .daypart-lbar .temp").fadeIn(167)
         }, 1333);
+      } else {
+        $('#lbar .daypart-lbar .section').fadeOut(0);
+
+        $("#lbar .lbar-tempunavailable").fadeIn(0);
       }
       setTimeout(() => {
         fidx++; showFB()
@@ -551,6 +585,11 @@ function forecastBarLoop(idx){
       $('#lbar .text-lbar').fadeIn(0);
       $("#lbar .text-lbar .timestamp").empty();
       if(lBarData.cities[lbarLocId].forecast.localForecast.noReport != true){
+        $("#lbar .text-lbar .background").fadeIn(0);
+        $("#lbar .text-lbar .background-bottom").fadeIn(0);
+        $("#lbar .text-lbar .forecast").fadeIn(0);
+        $("#lbar .lbar-tempunavailable").fadeOut(0);
+
         $("#lbar .text-lbar .timestamp").append(`${systemSettings.LBar.locations.cities[lbarLocId].locationName.toUpperCase()}: &nbsp; <em>${lBarData.cities[lbarLocId].forecast.localForecast.days[0].day}'S FORECAST</em>`);
         $("#lbar .text-lbar .forecast").text(lBarData.cities[lbarLocId].forecast.localForecast.days[0].desc);
       } else {
@@ -575,6 +614,11 @@ function forecastBarLoop(idx){
       $('#lbar .text-lbar').fadeIn(0);
       $("#lbar .text-lbar .timestamp").empty();
       if(lBarData.cities[lbarLocId].forecast.localForecast.noReport != true){
+        $("#lbar .text-lbar .background").fadeIn(0);
+        $("#lbar .text-lbar .background-bottom").fadeIn(0);
+        $("#lbar .text-lbar .forecast").fadeIn(0);
+        $("#lbar .lbar-tempunavailable").fadeOut(0);
+
         $("#lbar .text-lbar .timestamp").append(`${systemSettings.LBar.locations.cities[lbarLocId].locationName.toUpperCase()}: &nbsp; <em>${lBarData.cities[lbarLocId].forecast.localForecast.days[1].day}'S FORECAST</em>`);
         $("#lbar .text-lbar .forecast").text(lBarData.cities[lbarLocId].forecast.localForecast.days[1].desc);
       } else {
@@ -600,6 +644,7 @@ function forecastBarLoop(idx){
       $('#lbar .extended-lbar').fadeIn(0);
       $("#lbar .extended-lbar .timestamp").empty();
       if(lBarData.cities[lbarLocId].forecast.extendedForecast.noReport != true){
+        $("#lbar .extended-lbar .day").fadeIn(0);
         $("#lbar .extended-lbar .timestamp").append(`${systemSettings.LBar.locations.cities[lbarLocId].locationName.toUpperCase()}: &nbsp; <em>5 DAY FORECAST</em>`);
         for(let i = 0; i < 5; i++){
           $(`#lbar .extended-lbar .day.${numToWord(i+1)}`).removeClass("weekend");
@@ -612,9 +657,7 @@ function forecastBarLoop(idx){
           getIcon($(`#lbar .extended-lbar .day.${numToWord(i+1)} .icon`), lBarData.cities[lbarLocId].forecast.extendedForecast.days[i].icon, "forecast", "small");
         }
       } else {
-        for(let i = 0; i < 5; i++){
-          $(`#lbar .extended-lbar .day.${numToWord(i+1)}`).fadeOut(0);
-        }
+        $("#lbar .extended-lbar .day").fadeOut(0);
         $("#lbar .lbar-tempunavailable").fadeIn(0);
       }
       setTimeout(() => {
