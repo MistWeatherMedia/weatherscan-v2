@@ -3737,6 +3737,85 @@ function setMainCityBackground(name, state){
 	systemSettings.mainCity.upNextBG = citybg;
 }
 
+async function getCoordsLocID(locID) {
+	var url = "https://api.weather.com/v3/location/point?locid=" + locID + "&language=en-US&format=json&apiKey=" + api_key
+	
+	const data = await $.getJSON(url)
+	
+	try {
+		return String(data.location.latitude) + "," + String(data.location.longitude)
+	} catch (error) {
+		console.error(error)
+		return ""
+	}
+}
+
+async function centerDataMaps(lat, lon) {
+	const data = await $.getJSON(`https://api.weather.com/v3/location/point?geocode=${lat},${lon}&language=en-US&format=json&apiKey=${systemSettings.apiKeys.api_key}`)
+    var state = data.location.adminDistrictCode
+    switch (true) {
+        case state == "ME" || state == "VT" || state == "NH" || state == "MA" || state == "CT" || state == "RI" || state == "NY" || state == "NJ" || state == "PA" || state == "DE" || state == "MD" || state == "WV" || state == "OH" || state == "IN" || state == "MI" || state == "WI" || state == "MN" || state == "IA" || state == "IL":
+            systemSettings.dataMaps.topPos = 78
+            systemSettings.dataMaps.leftPos = -30
+            systemSettings.dataMaps.zoom = 3.3
+            break;
+        case state == "NC" || state == "VA" || state == "MO" || state == "KY" || state == "TN":
+            systemSettings.dataMaps.leftPos = -35.8;
+            systemSettings.dataMaps.topPos = 33.3;
+            systemSettings.dataMaps.zoom = 4;
+            break;
+        case state == "GA" || state == "FL" || state == "SC" || state == "AR" || state == "LA" || state == "MS" || state == "AL":
+            systemSettings.dataMaps.leftPos = -35.8;
+            systemSettings.dataMaps.topPos = 33.3;
+            systemSettings.dataMaps.zoom = 4;
+            break;
+        case state == "WA" || state == "ID" || state == "MT" || state == "ND" || state == "SD" || state == "WY" || state == "OR":
+            systemSettings.dataMaps.leftPos = 41;
+            systemSettings.dataMaps.topPos = 107;
+            systemSettings.dataMaps.zoom = 4;
+            break;
+        case state == "CA" || state == "NV" || state == "UT" || state == "CO" || state == "NE" || state == "KS":
+            systemSettings.dataMaps.leftPos = 34;
+            systemSettings.dataMaps.topPos = 67;
+            systemSettings.dataMaps.zoom = 3.7;
+            break;
+        case state == "TX" || state == "OK":
+            systemSettings.dataMaps.leftPos = 6;
+            systemSettings.dataMaps.topPos = 26;
+            systemSettings.dataMaps.zoom = 3.7;
+            break;
+        case state == "AZ" || state == "NM":
+            systemSettings.dataMaps.leftPos = 44;
+            systemSettings.dataMaps.topPos = 53;
+            systemSettings.dataMaps.zoom = 4.5;
+            break;
+        default:
+            systemSettings.dataMaps.leftPos = 0;
+            systemSettings.dataMaps.topPos = 18;
+            systemSettings.dataMaps.zoom = 1.25;
+    }
+}
+
+function distanceByDegrees(c1, c2) {
+    var lat1 = parseFloat(c1.lat), lon1 = parseFloat(c1.lon),
+        lat2 = parseFloat(c2.lat), lon2 = parseFloat(c2.lon),
+        dLat = lat2 - lat1, dLon = lon2 - lon1;
+		console.log(dLat)
+    return [Math.sqrt(dLat ** 2 + dLon ** 2), dLat, dLon];
+}
+
+function getTravelMapLimits(type) {
+    if (type === undefined) {
+        return [225, -225, 685, -685];
+    }
+    if (type[0] == "pacific" && type[1] == "north") {
+        return [120, -340, 310, -1050];
+    }
+    // if(type[0] == "atlantic" && type[1] == null){
+    //     return [225, -225, 1085, -285]
+    // }
+}
+
 var extraSlides = {
 	noBulletin: [
 		[

@@ -386,13 +386,7 @@ function sideBarLoop(idx) {
           sidx = 0;
           idx = undefined;
           clearInterval(currentCCInterval);
-          try {
-            lBarData.radarUnavailable = false
-            startMiniRadar(true);
-          } catch (error) {
-            lBarData.radarUnavailable = true
-            $(".radar-lbar").fadeOut(0)
-          }
+          startMiniRadar(true);
         }else{
           currentCC = sideBarFunctions[LBarSlideSettings[sidx]]
           startMiniRadar(false);

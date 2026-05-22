@@ -593,14 +593,21 @@ async function cleanupMiniRadarLayers() {
 }
 
 async function startMiniRadar(newSlide) {
-  if(newSlide){
-    await cleanupMiniRadarLayers();
-    await getMiniRadarTimestamps();
-    await addMiniRadarLayers();
-    await animateMiniRadar();
-  }else{
-    await animateMiniRadar();
+  try {
+    if(newSlide){
+      await cleanupMiniRadarLayers();
+      await getMiniRadarTimestamps();
+      await addMiniRadarLayers();
+      await animateMiniRadar();
+    }else{
+      await animateMiniRadar();
+    }
+    lBarData.radarUnavailable = false
+  } catch (error) {
+    console.error(error)
+    lBarData.radarUnavailable = true
   }
+  
 }
 async function stopMiniRadar() {
   var validLayers = miniRadarTimestamps.map((tss) => `radarlayer_${tss.ts}`);
@@ -611,13 +618,32 @@ async function stopMiniRadar() {
 }
 
 //i would recommend stopping this 3 seconds before the sim starts
-function preloadRadars(duration){
-  startLocalRadar();
-  startSatRadar();
-  startMiniRadar(true);
-  setTimeout(() => {
-    stopMiniRadar();
-    stopLocalRadar();
-    stopSatRadar();
-  }, duration);
+async function preloadRadars(){
+  try {
+    startLocalRadar();
+  } catch (error) {
+    console.log("startLocalRadar Error")
+    console.error(error)
+    weatherData.dopplerUnavailable
+  }
+
+  try {
+    startSatRadar();
+  } catch (error) {
+    console.log("startSatRadar Error")
+    console.error(error)
+    weatherData.satUnavailable
+  }
+  
+  try {
+    await startMiniRadar(true);
+  } catch (error) {
+    console.log("startMiniRadar Error")
+    console.error(error)
+    lBarData.radarUnavailable = true
+  }
+  
+  stopMiniRadar();
+  stopLocalRadar();
+  stopSatRadar();
 }

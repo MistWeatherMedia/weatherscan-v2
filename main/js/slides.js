@@ -289,7 +289,7 @@ function switchProvider(type) {
     }
   }
 }
-function slideBackground() {
+function segmentSet() {
   if (weatherData.severemode == true) {
     $("#slides-scroller .package-list").empty()
     orderidx = 1
@@ -329,16 +329,17 @@ function slideBackground() {
     $(".mapcorner.yellow").fadeIn(0)
     $("#slides-scroller .package-list-severe").fadeOut(0)
     $("#slides-scroller .package-list").fadeIn(0)
+
     if (lBarData.radarUnavailable) {
-    $(".radar-lbar").fadeOut(0)
-  } else {
-    $(".radar-lbar .miniradar-shrink").css({"transform":"none"})
-    $(".radar-lbar").fadeIn(0)
-    miniradar.resize()
-    miniEchoes.resize()
-    miniradarAmenitiesTrans.resize()
-    $(".radar-lbar .miniradar-shrink").css("transform","scaleY(0.83)")
-    //get new radar frames
+      $(".radar-lbar").fadeOut(0)
+    } else {
+      //$(".radar-lbar .miniradar-shrink").css({"transform":"none"})
+      //$(".radar-lbar").fadeIn(0)
+      //miniradar.resize()
+      //miniEchoes.resize()
+      //miniradarAmenitiesTrans.resize()
+      //$(".radar-lbar .miniradar-shrink").css("transform","scaleY(0.83)")
+      //get new radar frames
       if(gidx == 0) {
         try {
           if(miniRadarAnimation != undefined){clearInterval(miniRadarAnimation)}
@@ -349,6 +350,7 @@ function slideBackground() {
           $(".radar-lbar").fadeOut(0)
         }
       }
+    
     // setTimeout(() => {
     //   if(gidx == 0) {
     //     try {
@@ -361,7 +363,7 @@ function slideBackground() {
     //     }
     //   }
     // }, 6000);
-  }
+    }
   }
   //sidebar severe functions
   if (orderidx == 0) {
@@ -810,7 +812,7 @@ var slidePrograms = {
         $(".doppler-radar .radar-legend-light").text("Light")
       }
       $('.headertext').text("")
-      weatherData.dopplerUnavailable = false
+      //weatherData.dopplerUnavailable = false
 
       try {
         locradar.setProjection('mercator');
@@ -1323,23 +1325,30 @@ var slidePrograms = {
         $(".traffic-flow .panel.two .fullgroup").fadeOut(0)
         $(".traffic-flow .panel.three .fullgroup").fadeOut(0)
         for (var i = 0; i < 3; i++) {
+
           if (weatherData.trafficFlow.routes[i+bump]) {
             $(".traffic-flow .panel" + divs[i] + " .fullgroup").fadeIn(0)
             $(".traffic-flow .panel" + divs[i] + " .description").text(weatherData.trafficFlow.routes[i+bump].from + " to " + weatherData.trafficFlow.routes[i+bump].to)
-            $(".traffic-flow .panel" + divs[i] + " .trafficflow").text(weatherData.trafficFlow.routes[i+bump].speed)
-            $(".traffic-flow .panel" + divs[i] + " .triptime").text(weatherData.trafficFlow.routes[i+bump].travelTime)
-            $(".traffic-flow .panel" + divs[i] + " .trafficflowcover").css({"background-color":blockColors[weatherData.trafficFlow.routes[i+bump].color]})
             $(".traffic-flow .panel" + divs[i] + " .routeicon").css({"background-image": "url(" + weatherData.trafficFlow.routes[i+bump].routeIcon + ")", "background-repeat":"no-repeat", "background-size":"100%"})
-            if (weatherData.trafficFlow.routes[i+bump].speed != "CLEAR") {
-              $(".traffic-flow .panel" + divs[i] + " .mingroup").fadeIn(0)
-              $(".traffic-flow .panel" + divs[i] + " .flowBlock").fadeIn(0)
-              $(".traffic-flow .panel" + divs[i] + " .trafficflow").css({"padding-top":"0px","font-size":"92px"})
-              $(".traffic-flow .panel" + divs[i] + " .noIncidents").fadeOut(0)
-            } else {
-              $(".traffic-flow .panel" + divs[i] + " .mingroup").fadeOut(0)
-              $(".traffic-flow .panel" + divs[i] + " .trafficflow").css({"padding-top":"45px","font-size":"50px"})
+            if (weatherData.trafficFlow.routes[i+bump].color == "NOREPORT") {
               $(".traffic-flow .panel" + divs[i] + " .flowBlock").fadeOut(0)
-              $(".traffic-flow .panel" + divs[i] + " .noIncidents").fadeIn(0)
+              $(".traffic-flow .panel" + divs[i] + " .noIncidents").fadeOut(0)
+              $(".traffic-flow .panel" + divs[i] + " .mingroup").fadeOut(0)
+            } else {
+              $(".traffic-flow .panel" + divs[i] + " .trafficflow").text(weatherData.trafficFlow.routes[i+bump].speed)
+              $(".traffic-flow .panel" + divs[i] + " .triptime").text(weatherData.trafficFlow.routes[i+bump].travelTime)
+              $(".traffic-flow .panel" + divs[i] + " .trafficflowcover").css({"background-color":blockColors[weatherData.trafficFlow.routes[i+bump].color]})
+              if (weatherData.trafficFlow.routes[i+bump].speed != "CLEAR") {
+                $(".traffic-flow .panel" + divs[i] + " .mingroup").fadeIn(0)
+                $(".traffic-flow .panel" + divs[i] + " .flowBlock").fadeIn(0)
+                $(".traffic-flow .panel" + divs[i] + " .trafficflow").css({"padding-top":"0px","font-size":"92px"})
+                $(".traffic-flow .panel" + divs[i] + " .noIncidents").fadeOut(0)
+              } else {
+                $(".traffic-flow .panel" + divs[i] + " .mingroup").fadeOut(0)
+                $(".traffic-flow .panel" + divs[i] + " .trafficflow").css({"padding-top":"45px","font-size":"50px"})
+                $(".traffic-flow .panel" + divs[i] + " .flowBlock").fadeOut(0)
+                $(".traffic-flow .panel" + divs[i] + " .noIncidents").fadeIn(0)
+              }
             }
           }
         }
@@ -2787,13 +2796,12 @@ function slideKickOff() {
   createTopArea()
   switchProvider("provider")
   manageDurations()
-  checkWarningCrawl()
   setInterval(() => {
     checkWarningCrawl()
   }, 60000);
    //console.log(slideSettings.order[orderidx].slideLineup)
    //console.log(orderidx)
-  slideBackground()
+  segmentSet()
   showSlides();
   buildHeader();
   ccTickerLoop(0);
@@ -2850,7 +2858,7 @@ function showSlides() {
       headerRefresh();
     }
     console.log("severemode", weatherData.severemode)
-    slideBackground()
+    segmentSet()
   }
   //console.log(slideSettings.order[orderidx].slideLineup[gidx].slides[idx].duration)
   currentProgram = slidePrograms[slideSettings.order[orderidx].slideLineup[gidx].slides[idx].function];
@@ -3162,60 +3170,33 @@ function manageDurations() {
       break;
     case "traffic":
       var trafPages = Math.ceil(weatherData.trafficReport.incidents.length/2)
-      if(weatherData.trafficFlow.noReport == false && weatherData.trafficFlow.routes.length > 0){
-        if (trafPages == 3){
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [9000], function: "trafficOverview" },
-            { duration: [10000,9000,9000], function: "trafficReport" },
-            { duration: [10000,9000], function: "trafficFlow" },
-          ]
-        } else if (trafPages == 2) {
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [10000,9000], function: "trafficOverview" },
-            { duration: [10000,9000], function: "trafficReport" },
-            { duration: [9000,9000], function: "trafficFlow" },
-          ]
-        } else if (trafPages == 1) {
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [10000,9000], function: "trafficOverview" },
-            { duration: [12000], function: "trafficReport" },
-            { duration: [14000,11000], function: "trafficFlow" },
-          ]
-        } else {
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [13000,10000], function: "trafficOverview" },
-            { duration: [23000,10000], function: "trafficFlow" },
-          ]
-        }
+      if (trafPages == 3){
+        slideSettings.order[orderidx].slideLineup[gidx].slides = [
+          { duration: 4000, function: "trafficIntro" },
+          { duration: [9000], function: "trafficOverview" },
+          { duration: [10000,9000,9000], function: "trafficReport" },
+          { duration: [10000,9000], function: "trafficFlow" },
+        ]
+      } else if (trafPages == 2) {
+        slideSettings.order[orderidx].slideLineup[gidx].slides = [
+          { duration: 4000, function: "trafficIntro" },
+          { duration: [10000,9000], function: "trafficOverview" },
+          { duration: [10000,9000], function: "trafficReport" },
+          { duration: [9000,9000], function: "trafficFlow" },
+        ]
+      } else if (trafPages == 1) {
+        slideSettings.order[orderidx].slideLineup[gidx].slides = [
+          { duration: 4000, function: "trafficIntro" },
+          { duration: [10000,9000], function: "trafficOverview" },
+          { duration: [12000], function: "trafficReport" },
+          { duration: [14000,11000], function: "trafficFlow" },
+        ]
       } else {
-        if (trafPages == 3) {
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [12000,12000], function: "trafficOverview" },
-            { duration: [10000,10000,12000], function: "trafficReport" },
-          ]
-        } else if (trafPages == 2) {
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [19000,18000], function: "trafficOverview" },
-            { duration: [10000,9000], function: "trafficReport" },
-          ]
-        } else if (trafPages == 1) {
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [21000,19000], function: "trafficOverview" },
-            { duration: [16000], function: "trafficReport" },
-          ]
-        } else {
-          slideSettings.order[orderidx].slideLineup[gidx].slides = [
-            { duration: 4000, function: "trafficIntro" },
-            { duration: [28000, 28000], function: "trafficOverview" },
-          ]
-        }
+        slideSettings.order[orderidx].slideLineup[gidx].slides = [
+          { duration: 4000, function: "trafficIntro" },
+          { duration: [13000,10000], function: "trafficOverview" },
+          { duration: [23000,10000], function: "trafficFlow" },
+        ]
       }
       break;
     default:
@@ -3280,7 +3261,11 @@ function buildHeader(){
       case "golf":
         packageName = "GOLF";
         break;
+      case "spanish":
+        packageName = "ESPANOL";
+        break;
       default:
+        packageName = "UNDEFINED";
         break;
     }
     if(packageName != "EXTRALOCAL"){

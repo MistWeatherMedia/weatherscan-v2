@@ -8,6 +8,7 @@ var traf_key = "";
 //if you want to use airport icao codes, you can put that in "locationID" as long as you fill in a lat lon.
 //if there is no lat lon, you must use locationIDs
 //do not input configuration data into config.js, it will be overwritten on startup. put it in configs/yourConfig.json
+/*
 var systemSettings = {
   apiKeys: {
     api_key: "e1f10a1e78da46f5b10a1e78da96f525",
@@ -426,6 +427,8 @@ var systemSettings = {
     }
   }
 }
+*/
+var systemSettings = {}
 
 var slideSettings = {
   order: [
@@ -490,11 +493,6 @@ var eBaseLU = [
 var extraPackage = {duration: 60000 /*times amount of cities*/, 
   group: "extralocal", slides: [
   ]
-}
-for (var i = 0; i < systemSettings.extraCity.cities.length; i++) {
-  for (var ii = 0; ii < eBaseLU.length; ii++) {
-    //extraPackage.slides.push(eBaseLU[ii])
-  }
 }
 var spanishPackage = {duration: 60000, group: "spanish", slides: [
   {duration: 10000,  function: "currentConditions" },
