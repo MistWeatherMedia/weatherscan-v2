@@ -1136,7 +1136,6 @@ function getSpanishData() {
 async function getTrafficData() {
   async function getTrafficReport() {
     var trafurl = "https://data.traffic.hereapi.com/v7/incidents?in=circle:" + systemSettings.traffic.lat + "," + systemSettings.traffic.lon + ";r=4000&locationReferencing=tmc&lang=en-US&type=construction,accident&apiKey=" + traf_key
-    console.log(trafurl)
     
     const data = await $.getJSON(trafurl)
 
