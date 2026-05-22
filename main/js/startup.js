@@ -172,7 +172,7 @@ requestAnimationFrame(animate);
       systemSettings.appearanceSettings.adMessage = data.crawls.scanv2
     }
 
-    if (systemSettings.traffic.autoFind || traf_key == "nada" || traf_key == "") {
+    if (traf_key == "nada" || traf_key == "") {
       function fl(id) {
         return id != "traffic"
       }
