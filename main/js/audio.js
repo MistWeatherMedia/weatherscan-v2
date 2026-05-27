@@ -1,195 +1,251 @@
 class AudioManager {
     constructor() {
-        this.playlist = []
-        this.$players = $('<div id="players">')
-        this.isMobile = false
+        this.playlist = [];
+        this.isMobile = false;
 
-        $('body').append(this.$players)
+        this.$players = $('<div id="players">');
+        $('body').append(this.$players);
 
-        this.initializeAudio = function () {
-            //setTimeout(() => {
-                if (systemSettings.audioSettings.enableMusic) {
-                    this.buildPlaylist();
-                    if (systemSettings.audioSettings.randomStart) {
-                        this.shuffleStart()
-                    }
-                    if (systemSettings.audioSettings.shuffle) {
-                        shuffle(this.playlist)
-                    }
-                }
-            //}, 1000);
+        this.musicPlayer = this.createPlayer('musicPlayer', 'music');
+        this.voicePlayer = this.createPlayer('voicePlayer', 'voice');
+
+        $(document).one('mousedown', () => {
+            this.isMobile = true;
+
+            try {
+                this.musicPlayer.jPlayer('play');
+            } catch (e) {}
+
+            try {
+                this.voicePlayer.jPlayer('play');
+            } catch (e) {}
+        });
+    }
+
+    createPlayer(id, audioType) {
+        const $div = $(`<div id="${id}" class="jplayer ${audioType}"></div>`);
+
+        $div.jPlayer({
+            swfPath: `${document.baseURI}jplayer`,
+            supplied: 'mp3',
+            preload: 'auto',
+            solution: 'html',
+            volume: audioType === 'music' ? 0.8 : 1.0,
+            errorAlerts: false,
+            warningAlerts: false
+        });
+
+        this.$players.append($div);
+
+        return $div;
+    }
+
+    initializeAudio() {
+        if (systemSettings.audioSettings.enableMusic) {
+            this.buildPlaylist();
+
+            if (systemSettings.audioSettings.randomStart) {
+                this.shuffleStart();
+            }
+
+            if (systemSettings.audioSettings.shuffle) {
+                shuffle(this.playlist);
+            }
+
+            this.playMusicLoop();
         }
     }
 
     shuffleStart() {
-        var firstHalf = this.playlist
-        var secondHalf = firstHalf.splice(Math.floor(Math.random() * firstHalf.length))
-        this.playlist = [...secondHalf, ...firstHalf]
-        //console.log(this.playlist);
+        const firstHalf = this.playlist;
+        const secondHalf = firstHalf.splice(
+            Math.floor(Math.random() * firstHalf.length)
+        );
+
+        this.playlist = [...secondHalf, ...firstHalf];
+    }
+
+    buildPlaylist() {
+        const musicPath = 'music/';
+        const v1MusicPath = 'music/v1/';
+
+        systemSettings.audioSettings.order.forEach(order => {
+            if (order >= 34) {
+                this.playlist.push(
+                    `${v1MusicPath}Track ${order - 33}.mp3`
+                );
+            } else {
+                this.playlist.push(
+                    `${musicPath}Track ${order}.mp3`
+                );
+            }
+        });
+    }
+
+    playMusicLoop() {
+        if (!this.playlist.length) return;
+
+        let current = 0;
+
+        const playTrack = () => {
+            const track = this.playlist[current];
+
+            this.musicPlayer
+                .jPlayer('clearMedia')
+                .jPlayer('setMedia', {
+                    mp3: track
+                })
+                .jPlayer('play');
+
+            current++;
+
+            if (current >= this.playlist.length) {
+                current = 0;
+
+                if (systemSettings.audioSettings.shuffle) {
+                    shuffle(this.playlist);
+                }
+            }
+        };
+
+        this.musicPlayer
+            .off($.jPlayer.event.ended)
+            .on($.jPlayer.event.ended, playTrack);
+
+        playTrack();
+    }
+
+    playVoice(files) {
+        if (!files || !files.length) return;
+
+        let current = 0;
+
+        this.musicPlayer.jPlayer('volume', 0.3);
+
+        const playNext = () => {
+            if (current >= files.length) {
+                this.musicPlayer.jPlayer('volume', 0.8);
+                return;
+            }
+
+            const file = files[current++];
+
+            this.voicePlayer
+                .jPlayer('clearMedia')
+                .jPlayer('setMedia', {
+                    mp3: file
+                })
+                .jPlayer('play');
+        };
+
+        this.voicePlayer
+            .off($.jPlayer.event.ended)
+            .on($.jPlayer.event.ended, playNext);
+
+        playNext();
     }
 
     playCC() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-CurrentConditions_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-CurrentConditions_Default1.wav'
+        ]);
     }
 
     playLF() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-TextForecast_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-TextForecast_Default1.wav'
+        ]);
     }
 
     playDP() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-DaypartForecast_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-DaypartForecast_Default1.wav'
+        ]);
     }
 
     playTrafficCond() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-TrafficOverview_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-TrafficOverview_Default1.wav'
+        ]);
     }
+
     playTrafficFlow() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-TrafficFlow_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-TrafficFlow_Default1.wav'
+        ]);
     }
+
     playRegionalForecast() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-RegionalForecastConditions_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-RegionalForecastConditions_Default1.wav'
+        ]);
     }
+
     playPollenReport() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-AllergyReport_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-AllergyReport_Default1.wav'
+        ]);
     }
+
     playWarningBeep() {
-        //this.$players.find('.music').jPlayer('volume', 0.0);
-        this.startPlaying(['/narrations/beep.wav','/narrations/beep.wav','/narrations/beep.wav','/narrations/beep.wav'], false);
-        // setTimeout(() => {
-        //    this.$players.find('.music').jPlayer('volume', 0.8); 
-        // }, 5250);
+        this.playVoice([
+            '/narrations/beep.wav',
+            '/narrations/beep.wav',
+            '/narrations/beep.wav',
+            '/narrations/beep.wav'
+        ]);
     }
+
     playAirportConditions() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-LocalAirportConditions_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-LocalAirportConditions_Default1.wav'
+        ]);
     }
+
     playDopplerRadar() {
-        if(!systemSettings.audioSettings.narrations) return;
-        this.startPlaying(['/narrations/Local-LocalDoppler_Default1.wav'], false)
+        if (!systemSettings.audioSettings.narrations) return;
+
+        this.playVoice([
+            '/narrations/Local-LocalDoppler_Default1.wav'
+        ]);
     }
-//for (var i = 0; i < 7; i++) {
-            //setTimeout(() => {
-                //console.log(i+1)
-                //731
-            //}, i*731);
-        //}
-    buildPlaylist() {
-        var musicPath = 'music/';
-        var v1MusicPath = 'music/v1/';
-        systemSettings.audioSettings.order.forEach(order => {
-            if(order >= 34){
-                this.playlist.push(`${v1MusicPath}Track ${order - 33}.mp3`);
-            }else{
-                this.playlist.push(`${musicPath}Track ${order}.mp3`);
-            }
+    startPlaying(arr, loop = false) {
+    if (loop) {
+            this.playlist = [...arr];
+            this.playMusicLoop();
+        } else {
+            this.playVoice(arr);
         }
-        );
-    }
-
-    startPlaying(arr, loop) {
-        var audioType = loop ? 'music' : 'voice'
-        if (this.$players.find(`.${audioType}`).length > 0)
-            return;
-
-        var current = -1
-        const len = arr.length;
-
-        //functions built in with startPlaying
-        const initPlayer = (id, audioType) => {
-            var $div = $(`<div id="${id}" class="jplayer ${audioType}"></div>`);
-            $div.jPlayer({
-                swfPath: `${document.baseURI}jplayer`,
-                preload: 'auto',
-                ended: function () {
-                    playNext()
-                }
-            });
-            this.$players.append($div);
-            return $div;
-        }
-        var $player = initPlayer('p1', audioType)
-        var $preloader = initPlayer('p2', audioType)
-
-        const playNext = () => {
-            current = getNextIndex();
-
-            if (getNextIndex() === null) {
-                $preloader.off($.jPlayer.event.ended).on($.jPlayer.event.ended, () => {
-                    this.$players.find('.music').jPlayer('volume', 0.8);
-                    $player.remove();
-                    $preloader.remove();
-                }
-                );
-                switchAudio();
-            } else {
-                switchAudio();
-                preloadTrack(arr[getNextIndex()]);
-            }
-        }
-            ;
-
-        const preloadTrack = (trackName) => {
-            try {
-                $preloader.jPlayer('setMedia', {
-                    mp3: trackName
-                }).jPlayer('play').jPlayer('stop');
-            } catch (e) {
-                setTimeout(() => preloadTrack(trackName), 500);
-            }
-        }
-            ;
-
-        const getNextIndex = () => {
-            const nextIndex = current + 1;
-            if (nextIndex < len) {
-                return nextIndex;
-            } else {
-                return (loop ? 0 : null)
-            }
-        }
-            ;
-
-        const switchAudio = () => {
-            var tempAudio = $player;
-            var tempAudio2 = $preloader;
-            $player = null,
-                $preloader = null;
-            $player = tempAudio2;
-            $preloader = tempAudio;
-            $player.jPlayer('play');
-
-            $(document).on('mousedown', () => {
-                if (!this.isMobile) {
-                    $player.jPlayer('play');
-                    this.isMobile = true;
-                }
-            }
-            );
-
-        }
-            ;
-
-        if (audioType != 'music') {
-            this.$players.find('.music').jPlayer('volume', 0.3);
-        }
-
-        $preloader.jPlayer('setMedia', {
-            mp3: arr[0]
-        });
-        playNext();
     }
     stopPlaying() {
-        this.$players.find('.music').jPlayer('pause');
+        this.musicPlayer.jPlayer('pause');
     }
+
     resumePlaying() {
-        this.$players.find('#p2').jPlayer('play', 0);
+        this.musicPlayer.jPlayer('play');
+    }
+
+    destroy() {
+        this.musicPlayer.jPlayer('destroy');
+        this.voicePlayer.jPlayer('destroy');
+        this.$players.remove();
     }
 }
-var audioPlayer
+
+var audioPlayer;

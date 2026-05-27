@@ -3714,17 +3714,22 @@ function setMainCityBackground(name, state){
 		{name: "san diego", state: "CA", bg: "san_diego_bg"},
 		{name: "san francisco", state: "CA", bg: "san_francisco_bg"},
 		{name: "seattle", state: "WA", bg: "seattle_bg"},
-		{name: "saint louis", state: "MO", bg: "stlouis_bg"},
+		{name: "st. louis", state: "MO", bg: "stlouis_bg"},
 		{name: "tampa", state: "FL", bg: "tampa_bg"},
 		{name: "washington", state: "DC", bg: "washington_dc_bg"},
 		//ocean bgs
 		{name: "jacksonville", state: "FL", bg: "ocean_bg"},
+		{name: "st. augustine", state: "FL", bg: "staugustinebeach"},
 		{name: "savannah", state: "GA", bg: "ocean_bg"},
 		{name: "atlantic city", state: "NJ", bg: "ocean_bg"},
 		{name: "millsboro", state: "DE", bg: "ocean_bg"},
 		//city bgs
 		{name: "fresno", state: "CA", bg: "city_bg"},
-		{name: "macon", state: "GA", bg: "city_bg"}
+		{name: "macon", state: "GA", bg: "city_bg"},
+		{name: "parkersburg", state: "WV", bg:"city_bg"},
+		{name: "san antonio", state: "TX", bg:"city_bg"},
+		{name: "college station", state: "TX", bg:"city_bg"},
+		{name: "bryan", state: "TX", bg:"city_bg"}
 	]
 	for(let i = 0; i < newcitybg.length; i++){
 		if(name == newcitybg[i].name && state == newcitybg[i].state){

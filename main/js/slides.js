@@ -786,13 +786,14 @@ var slidePrograms = {
       if (systemSettings.appearanceSettings.nationalConfig) {
         rdrPgm = slidePrograms["dopplerRadar"]
       } else {
-      if (radarCycle < 5) {
+      /*if (radarCycle < 5) {
         rdrPgm = slidePrograms["dopplerRadar"]
         radarCycle++
       } else {
         rdrPgm = slidePrograms["radarSatellite"]
         radarCycle = 0
-      }
+      }*/
+     rdrPgm = Math.random() > 0.5 ? slidePrograms["dopplerRadar"] : slidePrograms["radarSatellite"];
       }
       rdrPgm()
     },
@@ -1655,33 +1656,21 @@ var slidePrograms = {
     internationalMap() {
       if (round == 0) {$("#slides-background").fadeOut(0)}
       var divs = [".zero", ".one", ".two", ".three", ".four", ".five", ".six", ".seven"]
-      var roundToRegion = {
-        0:"europe",//canada
-        5:"canada",
-        2:"caribbean",
-        3:"southamerica",
-        4:"britain",
-        1:"mexico",
-        6:"africa",
-        7:"india",
-        8:"eastasia",
-        9:"oceania",
-        10:"australia",
+      var roundToRegion = systemSettings.international.mapOrder;
+      var regionToObj = {
+        "europe":weatherData.internationalMap.europe,
+        "canada":weatherData.internationalMap.canada,
+        "caribbean":weatherData.internationalMap.caribbean,
+        "southamerica":weatherData.internationalMap.southamerica,
+        "britain":weatherData.internationalMap.britain,
+        "mexico":weatherData.internationalMap.mexico,
+        "africa":weatherData.internationalMap.africa,
+        "india":weatherData.internationalMap.india,
+        "eastasia":weatherData.internationalMap.eastasia,
+        "oceania":weatherData.internationalMap.oceania,
+        "australia":weatherData.internationalMap.australia
       }
-      var roundToObj = {
-        0:weatherData.internationalMap.europe,//canada
-        5:weatherData.internationalMap.canada,
-        2:weatherData.internationalMap.caribbean,
-        3:weatherData.internationalMap.southamerica,
-        4:weatherData.internationalMap.britain,
-        1:weatherData.internationalMap.mexico,
-        6:weatherData.internationalMap.africa,
-        7:weatherData.internationalMap.india,
-        8:weatherData.internationalMap.eastasia,
-        9:weatherData.internationalMap.oceania,
-        10:weatherData.internationalMap.australia
-      }
-      var regionExt = roundToObj[round]
+      var regionExt = regionToObj[systemSettings.international.mapOrder[round]]
       $('.titletext').text("International Forecast")
       $('.headertext').text("")
 
@@ -1703,7 +1692,7 @@ var slidePrograms = {
       $(".international-map .dayname").fadeIn(500)
 
       setTimeout(() => {
-        if (round < 1) {
+        if (round < systemSettings.international.maxMaps - 1) {
           $(".international-map ." + roundToRegion[round]).fadeOut(500)
           $(".international-map .dayname").fadeOut(500)
           setTimeout(() => {
@@ -1718,7 +1707,7 @@ var slidePrograms = {
             $("#slides-background").fadeIn(0)
           }, 500);
         }
-      }, (slideSettings.order[orderidx].slideLineup[gidx].slides[idx].duration/2)-500);
+      }, (slideSettings.order[orderidx].slideLineup[gidx].slides[idx].duration/systemSettings.international.maxMaps)-500);
     },
     internationalForecast() {
       var divs = [".one", ".two", ".three"]
@@ -1747,9 +1736,11 @@ var slidePrograms = {
             }
           }
         }
+        var intlCap = 6 - systemSettings.international.maxMaps;
+        if(intlCap > 4) intlCap = 4;
         var rdLength = round < 2 ? 9000 : 10000
         setTimeout(() => {
-          if (round < 3) {
+          if (round < intlCap - 1) {
             fadeSlideOut($(".international-forecast"), 500, false)
             setTimeout(() => {
               round++
@@ -3034,10 +3025,12 @@ function manageDurations() {
       break;
     case "spanish":
       slideSettings.order[orderidx].slideLineup[gidx].slides = [
+        { function: "nullFunction" },
         { duration: 14000, function: "currentConditions" },
         { duration: 16000, function: "dopplerRadar" },
         { duration: 14000, function: "dayPart" },
         { duration: 16000, function: "extendedForecast" },
+         { function: "nullFunction" },
       ]
       break;
     case "radar":
@@ -3122,11 +3115,25 @@ function manageDurations() {
       ]
       break;
     case "international":
-      slideSettings.order[orderidx].slideLineup[gidx].slides = [
-        { duration: 4000, function: "internationalIntro" },
-        { duration: 18000, function: "internationalMap" },
-        { duration: 38000, function: "internationalForecast" },
-      ]
+      if(systemSettings.international.maxMaps <= 2){
+        slideSettings.order[orderidx].slideLineup[gidx].slides = [
+          { duration: 4000, function: "internationalIntro" },
+          { duration: 18000, function: "internationalMap" },
+          { duration: 38000, function: "internationalForecast" },
+        ]
+      }else if(systemSettings.international.maxMaps == 3){
+        slideSettings.order[orderidx].slideLineup[gidx].slides = [
+          { duration: 4000, function: "internationalIntro" },
+          { duration: 27000, function: "internationalMap" },
+          { duration: 29000, function: "internationalForecast" },
+        ]
+      }else if(systemSettings.international.maxMaps >= 4){
+        slideSettings.order[orderidx].slideLineup[gidx].slides = [
+          { duration: 4000, function: "internationalIntro" },
+          { duration: 36000, function: "internationalMap" },
+          { duration: 20000, function: "internationalForecast" },
+        ]
+      }
       break;
     case "golf":
       slideSettings.order[orderidx].slideLineup[gidx].slides = [
@@ -3213,17 +3220,35 @@ function buildHeader(){
     return;
   }
   $("#slides-scroller .package-list").empty()
-  for(let i = gidx; i < slideSettings.order[0].slideLineup.length; i++){
+  let packageTotal = 0;
+  var n = 1;
+  for(let i = gidx; i < slideSettings.order[0].slideLineup.length; i++, n++){
+    if (n >= slideSettings.order[orderidx].slideLineup.length) {n = 0}
     let packageName = "";
+    try {
+      if((slideSettings.order[orderidx].slideLineup[i].group == "forecast" || slideSettings.order[orderidx].slideLineup[i].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[i].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[n].group == "forecast" || slideSettings.order[orderidx].slideLineup[n].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[n].group == "minicoretwo")){
+        continue;
+      }else if(slideSettings.order[orderidx].slideLineup[i].group == slideSettings.order[orderidx].slideLineup[n].group){continue;}
+    } catch (error) {
+      console.error(error)
+      //absolutely nothing
+    }
+    if(i == slideSettings.order[0].slideLineup.length - 1){
+      if((slideSettings.order[orderidx].slideLineup[i].group == "forecast" || slideSettings.order[orderidx].slideLineup[i].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[i].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[0].group == "forecast" || slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo")){
+        $('#slides-scroller .package-list .divider-arrow').last().remove();
+        break;
+      }
+    }
+    
     switch(slideSettings.order[0].slideLineup[i].group){
       case "forecast":
-        packageName = systemSettings.mainCity.scrollerDisplayName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerDisplayName.toUpperCase();
+        packageName = systemSettings.mainCity.scrollerName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerName.toUpperCase();
         break;
       case "minicoreone":
-        packageName = systemSettings.mainCity.scrollerDisplayName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerDisplayName.toUpperCase();
+        packageName = systemSettings.mainCity.scrollerName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerName.toUpperCase();
         break;
       case "minicoretwo":
-        packageName = systemSettings.mainCity.scrollerDisplayName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerDisplayName.toUpperCase();
+        packageName = systemSettings.mainCity.scrollerName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerName.toUpperCase();
         break;
       case "extralocal":
         packageName = "EXTRALOCAL";
@@ -3269,23 +3294,29 @@ function buildHeader(){
         break;
     }
     if(packageName != "EXTRALOCAL"){
-      $('#slides-scroller .package-list').append(`<span class=" listElement shrinkY ${i === 0 ? "main": ""}${i === 1 ? "next": ""}">${packageName}</span>`);
+      $('#slides-scroller .package-list').append(`<span class=" listElement shrinkY ${packageTotal === 0 ? "main": ""}${packageTotal === 1 ? "next": ""}">${packageName}</span>`);
     } else {
       //append all these mfs (i'll do it later)
       for(let e = 0; e < systemSettings.extraCity.cities.length; e++){
-        $('#slides-scroller .package-list').append(`<span class=" listElement shrinkY ${i === 0 && e === 0 ? "main": ""}${i === 1 && e === 0 ? "next": ""}">${systemSettings.extraCity.cities[e].locationName.toUpperCase()}</span>`);
+        $('#slides-scroller .package-list').append(`<span class=" listElement shrinkY ${packageTotal === 0 && e === 0 ? "main": ""}${packageTotal === 1 && e === 0 ? "next": ""}">${systemSettings.extraCity.cities[e].scrollerName != undefined ? systemSettings.extraCity.cities[e].scrollerName.toUpperCase() : systemSettings.extraCity.cities[e].locationName.toUpperCase()}</span>`);
         if (e != systemSettings.extraCity.cities.length-1) $('#slides-scroller .package-list').append(`<span class="shrinkY divider-arrow"> < </span>`);
       }
     }
     if(i < slideSettings.order[0].slideLineup.length - 1){
       $('#slides-scroller .package-list').append(`<span class="shrinkY divider-arrow"> < </span>`);
     }
-  }
-  for(let j = slideSettings.order[0].slideLineup.length; j < gidx + slideSettings.order[0].slideLineup.length; j++){
-
+    packageTotal++;
   }
 }
 function headerRefresh() {
+  try {
+    if((slideSettings.order[orderidx].slideLineup[gidx-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[gidx].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoretwo")){
+      return;
+    }else if(slideSettings.order[orderidx].slideLineup[gidx-1].group == slideSettings.order[orderidx].slideLineup[gidx].group){return;}
+  } catch (error) {console.error(error)
+    if(gidx == 0 && ((slideSettings.order[orderidx].slideLineup[0].group == "forecast" || slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoretwo"))){return;}
+  }
+
   $('#slides-scroller span.main').removeClass("main");
   $('#slides-scroller span.next').addClass("main");
   $('#slides-scroller span.next').removeClass("next");
@@ -3300,17 +3331,7 @@ function headerRefresh() {
       $(element).css('width', '');
     }
   })
-  //for (var i = 0; i < prevslides.length; i++) {
-  //  sliderLeft += -0.75*($(prevslides[i]).outerWidth(true) + $('#slides-scroller .divider-arrow').first().outerWidth(true));
-  //}
-  //console.log(sliderLeft);
-  //someone needs to adjust the multiplier because it still isnt perfect
-  //console.log()
-  //console.log($("#slides-scroller .package-list span:first-of-type").position().left)
-  //var mgVal = 0
-  //while (parseInt($("#slides-scroller .package-list").css("margin-left")) < (firstWidth * -1)) {
-  //  mgVal += 4
-  //}
+  
   $('#slides-scroller .package-list').animate({ 'margin-left': firstWidth + 'px' }, time, 'linear', function(){
     setTimeout(function () {
       var prevSlide = $("#slides-scroller .package-list span:first-of-type");

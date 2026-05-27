@@ -2630,9 +2630,13 @@ async function startPrograms() {
 }
 
 setInterval(function () {
-  var today = new Date();
-  var date = today.toString().replace('01', '1').replace('02', '2').replace('03', '3').replace('04', '4').replace('05', '5').replace('06', '6').replace('07', '7').replace('08', '8').replace('09', '9').slice(4,10).trimRight() 
-  var time = today.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric', second: 'numeric'}).replace(/ /g,' ').toLowerCase().replaceAll(" ", "")
-  var spacer = ((time.length > 7) ? " " : "  ")
-  $('#date-time').text(date + "\n" + time);
-}, 1000);
+    var today = new Date();
+    var date = today.toString().replace('01', '1').replace('02', '2').replace('03', '3').replace('04', '4').replace('05', '5').replace('06', '6').replace('07', '7').replace('08', '8').replace('09', '9').slice(4,10).trimRight() 
+    var time = today.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric', second: 'numeric'}).replace(/ /g,' ').toLowerCase().replaceAll(" ", "")
+    if(systemSettings.mainCity.timeZone != undefined){
+      date = today.toLocaleDateString('en-US', {month: 'short', 'day': 'numeric', timeZone: systemSettings.mainCity.timeZone});
+      time = today.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric', second: 'numeric', timeZone: systemSettings.mainCity.timeZone}).replace(/ /g,' ').toLowerCase().replaceAll(" ", "")
+    }
+    var spacer = ((time.length > 7) ? " " : "  ")
+    $('#date-time').text(date + "\n" + time);
+  }, 1000);

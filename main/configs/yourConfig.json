@@ -282,6 +282,20 @@
           ]
         },
         "international": {
+          "mapOrder": [
+            "europe",
+            "canada",
+            "caribbean",
+            "southamerica",
+            "britain",
+            "mexico",
+            "africa",
+            "india",
+            "eastasia",
+            "oceania",
+            "australia"
+          ],
+          "maxMaps": 2,
           "map": {
             "canada": [
               {"locationName":"Dawson","locationID":"CAXX0109:1:CA"},

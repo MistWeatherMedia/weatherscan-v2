@@ -123,7 +123,7 @@ var travelRegional = [
     { locationName: "New Orleans", lat: 29.951, lon: -90.072, topPos: 2550, leftPos: 4100 },
     { locationName: "Mobile", lat: 30.695, lon: -88.043, topPos: 2530, leftPos: 4400 },
     { locationName: "Tallahassee", lat: 30.438, lon: -84.281, topPos: 2500, leftPos: 4700 },
-    { locationName: "Jacksonville", lat: 30.332, lon: -81.656, topPos: 2537, leftPos: 5080 },
+    { locationName: "Jacksonville", lat: 30.332, lon: -81.656, topPos: 2537, leftPos: 5080, type: ["atlantic"] },
     { locationName: "Orlando", lat: 28.538, lon: -81.379, topPos: 2730, leftPos: 5075 },
     { locationName: "Tampa", lat: 27.951, lon: -82.457, topPos: 2750, leftPos: 4850 },
     { locationName: "Fort Myers", lat: 26.640, lon: -81.872, topPos: 2955, leftPos: 4960 },
@@ -164,6 +164,7 @@ async function getMainCity() {
         const data = await $.getJSON(queryURL)
 
         // fcst/obs
+        systemSettings.mainCity.timeZone = data.location.ianaTimeZone[0];
         systemSettings.mainCity.locationName = data.location.displayName[0].replaceAll(" Charter Township", "").replaceAll(" Township", "");
         systemSettings.mainCity.obsName = data.location.displayName[0];
         systemSettings.mainCity.bulletinName = data.location.displayName[0] + " Area";
