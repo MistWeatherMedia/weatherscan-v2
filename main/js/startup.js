@@ -237,7 +237,7 @@ requestAnimationFrame(animate);
 
     console.log("warning crawl data", weatherData.crawlAlerts)
 
-    startPrograms()
+    await startPrograms()
 }
 
 //this kicks everything off, it is not a part of startSystem()
