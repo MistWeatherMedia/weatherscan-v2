@@ -3743,7 +3743,10 @@ function setMainCityBackground(name, state){
 }
 
 async function getCoordsLocID(locID) {
-	if (!locID) return ""
+	if (!locID) {
+		console.error("invalid locID");
+		return ""
+	}
 	var url = "https://api.weather.com/v3/location/point?locid=" + locID + "&language=en-US&format=json&apiKey=" + api_key
 
 	try {

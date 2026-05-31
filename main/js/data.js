@@ -431,7 +431,7 @@ async function getCoreData() {
     }
   } catch (error) {
     console.log("catch bulletin alerts error")
-    console.log(error)
+    console.error(error)
     weatherData.alerts.mainLoc = {locationname:systemSettings.mainCity.locationName,warnings:[], pages:0,alertsAmount:0}
   }
 }
@@ -2501,12 +2501,12 @@ function getBeachData() {
       while (tdone == false) {
         if (Tdata.predictions[index].type == "L") {
           if (new Date(Tdata.predictions[index].t) > cdate) {
-            weatherData.tides.stations[station].low[li] = dateFns.format(new Date(Tdata.predictions[index].t), "h:mm a") + " " + shortWeekDays[new Date(Tdata.predictions[index].t).getDay()]
+            weatherData.tides.stations[station].low[li] = dateFns.format(new Date(Tdata.predictions[index].t), "h:mm a").toLowerCase() + " " + shortWeekDays[new Date(Tdata.predictions[index].t).getDay()]
             li++
           }
         } else if (Tdata.predictions[index].type == "H") {
           if (new Date(Tdata.predictions[index].t) > cdate) {
-            weatherData.tides.stations[station].high[hi] = dateFns.format(new Date(Tdata.predictions[index].t), "h:mm a") + " " + shortWeekDays[new Date(Tdata.predictions[index].t).getDay()]
+            weatherData.tides.stations[station].high[hi] = dateFns.format(new Date(Tdata.predictions[index].t), "h:mm a").toLowerCase() + " " + shortWeekDays[new Date(Tdata.predictions[index].t).getDay()]
             hi++
           }
         }
@@ -2547,8 +2547,8 @@ function getBeachData() {
       if (new Date(Sdata.sunsetTimeLocal[ssid]) < cdate) {{
         ssid = 1
       }}
-      weatherData.tides.sunrise = dateFns.format(new Date(Sdata.sunriseTimeLocal[srid]),"h:mm a") + " " + shortWeekDays[new Date(Sdata.sunriseTimeLocal[srid]).getDay()]
-      weatherData.tides.sunset = dateFns.format(new Date(Sdata.sunsetTimeLocal[ssid]),"h:mm a") + " " + shortWeekDays[new Date(Sdata.sunsetTimeLocal[ssid]).getDay()]
+      weatherData.tides.sunrise = dateFns.format(new Date(Sdata.sunriseTimeLocal[srid]),"h:mm a").toLowerCase() + " " + shortWeekDays[new Date(Sdata.sunriseTimeLocal[srid]).getDay()]
+      weatherData.tides.sunset = dateFns.format(new Date(Sdata.sunsetTimeLocal[ssid]),"h:mm a").toLowerCase() + " " + shortWeekDays[new Date(Sdata.sunsetTimeLocal[ssid]).getDay()]
     } catch (error) {
       console.error(error)
       
