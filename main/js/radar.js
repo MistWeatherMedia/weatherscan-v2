@@ -620,21 +620,21 @@ async function stopMiniRadar() {
 //i would recommend stopping this 3 seconds before the sim starts
 async function preloadRadars(){
   try {
-    startLocalRadar();
+    await startLocalRadar();
   } catch (error) {
     console.log("startLocalRadar Error")
     console.error(error)
-    weatherData.dopplerUnavailable
+    weatherData.dopplerUnavailable = true
   }
 
   try {
-    startSatRadar();
+    await startSatRadar();
   } catch (error) {
     console.log("startSatRadar Error")
     console.error(error)
-    weatherData.satUnavailable
+    weatherData.satUnavailable = true
   }
-  
+
   try {
     await startMiniRadar(true);
   } catch (error) {
@@ -642,7 +642,7 @@ async function preloadRadars(){
     console.error(error)
     lBarData.radarUnavailable = true
   }
-  
+
   stopMiniRadar();
   stopLocalRadar();
   stopSatRadar();

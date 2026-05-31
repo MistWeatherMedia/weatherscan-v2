@@ -3743,11 +3743,11 @@ function setMainCityBackground(name, state){
 }
 
 async function getCoordsLocID(locID) {
+	if (!locID) return ""
 	var url = "https://api.weather.com/v3/location/point?locid=" + locID + "&language=en-US&format=json&apiKey=" + api_key
-	
-	const data = await $.getJSON(url)
-	
+
 	try {
+		const data = await $.getJSON(url)
 		return String(data.location.latitude) + "," + String(data.location.longitude)
 	} catch (error) {
 		console.error(error)
