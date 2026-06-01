@@ -276,6 +276,7 @@ async function getExtraCities() {
         const data = await $.getJSON(`https://api.weather.com/v3/location/point?icaoCode=${icao}&language=en-US&format=json&apiKey=${systemSettings.apiKeys.api_key}`)
 
         extraCityObj = {
+            packageName: "locname",
             locationName: data.location.displayName.replaceAll(" Charter Township", "").replaceAll(" Township", ""),
             bulletinName: data.location.displayName.replaceAll(" Charter Township", "").replaceAll(" Township", "") + " Area",
             lat: data.location.latitude,

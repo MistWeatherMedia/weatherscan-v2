@@ -34,6 +34,7 @@
         },
         "packageSettings":["forecast","health","extralocal","travel", "airport","extralocal","minicoreone","garden","golf","international"],
         "severePackageSettings":["severeA","severeB"],
+        "severePackageName":"SEVERE WEATHER MESSAGE",
         "LBar": {
           "gradientDirection":"right",
           "ccTicker":{
@@ -96,6 +97,9 @@
           "zoom":"3.3"
         },
         "mainCity":{
+          "packageName":"locname",
+          "spanishPackageName":"ESPANOL",
+          "radarPackageName":"RADAR",
             "autoFind":true,
             "locationName":"",
             "bulletinName":"",
@@ -126,6 +130,7 @@
             "maxCities":3,
             "cities":[
               {
+                    "packageName":"locname",
                     "locationName":"",
                     "obsName":"",
                     "icaoCode":"",
@@ -189,6 +194,7 @@
             ]
         },
         "traffic": {
+          "packageName":"TRAFFIC",
             "locationName": "",
             "lat": "",
             "lon": "",
@@ -220,6 +226,7 @@
             ]
         },
         "travel": {
+          "packageName":"TRAVEL",
           "regionalMap":{ 
             "enabled":true,
             "autoFind":true,
@@ -248,6 +255,7 @@
           ]
         },
         "health": {
+          "packageName":"HEALTH",
           "autoFind":true,
           "locationName": "",
           "lat": "",
@@ -256,6 +264,7 @@
           "icaoCode": ""
         },
         "airport": {
+          "packageName":"AIRPORT",
           "autoFind":true,
           "mainEnabled": true,
           "main": [
@@ -282,6 +291,7 @@
           ]
         },
         "international": {
+          "packageName":"INTERNATIONAL",
           "mapOrder": [
             "europe",
             "canada",
@@ -406,6 +416,7 @@
           ]
         },
         "golf": {
+          "packageName":"GOLF",
           "autoFind":true,
           "teeTime": {
            "locationName": "",
@@ -419,11 +430,13 @@
           ]
         },
         "garden": {
+          "packageName":"GARDEN",
           "autoFind":true,
           "locationName": "",
           "locationID":""
         },
         "ski": {
+          "packageName":"SKI",
           "resorts": [
             { "displayName": "Snowshow Mountain", "state": "WV", "resortId": "304001" },
             { "displayName": "Baker Mountain", "state": "ME", "resortId": "207024" },
@@ -440,6 +453,7 @@
           ]
         },
         "beach": {
+          "packageName":"BOAT & BEACH",
           "surfReport": {
             "buoy":"",
             "displayName":""

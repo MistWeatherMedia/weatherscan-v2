@@ -192,6 +192,8 @@ requestAnimationFrame(animate);
       slideSettings.order[1].slideLineup.push(packageLibrary[systemSettings.severePackageSettings[i]])
     }
 
+    $(".mainsev").text(systemSettings.severePackageName)
+
     //all starting data calls
     console.log("systemSettings", systemSettings)
 

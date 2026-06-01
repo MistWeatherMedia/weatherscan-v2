@@ -3242,13 +3242,13 @@ function buildHeader(){
     
     switch(slideSettings.order[0].slideLineup[i].group){
       case "forecast":
-        packageName = systemSettings.mainCity.scrollerName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerName.toUpperCase();
+        packageName = systemSettings.mainCity.packageName == "locname" ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.packageName;
         break;
       case "minicoreone":
-        packageName = systemSettings.mainCity.scrollerName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerName.toUpperCase();
+        packageName = systemSettings.mainCity.packageName == "locname" ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.packageName;
         break;
       case "minicoretwo":
-        packageName = systemSettings.mainCity.scrollerName == undefined ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.scrollerName.toUpperCase();
+        packageName = systemSettings.mainCity.packageName == "locname" ? systemSettings.mainCity.locationName.toUpperCase() : systemSettings.mainCity.packageName;
         break;
       case "extralocal":
         packageName = "EXTRALOCAL";
@@ -3257,37 +3257,37 @@ function buildHeader(){
         packageName = "WELCOME";
         break;
       case "health":
-        packageName = "HEALTH";
+        packageName = systemSettings.health.packageName;
         break;
       case "travel":
-        packageName = "TRAVEL";
+        packageName = systemSettings.travel.packageName;
         break;
       case "airport":
-        packageName = "AIRPORT";
+        packageName = systemSettings.airport.packageName;
         break;
       case "garden":
-        packageName = "GARDEN";
+        packageName = systemSettings.garden.packageName;
         break;
       case "ski":
-        packageName = "SKI";
+        packageName = systemSettings.ski.packageName;
         break;
       case "beach":
-        packageName = "BOAT & BEACH";
+        packageName = systemSettings.beach.packageName;
         break;
       case "international":
-        packageName = "INTERNATIONAL";
+        packageName = systemSettings.international.packageName;
         break;
       case "traffic":
-        packageName = "TRAFFIC";
+        packageName = systemSettings.traffic.packageName;
         break;
       case "radar":
-        packageName = "LOCAL RADAR";
+        packageName = systemSettings.mainCity.radarPackageName;
         break;
       case "golf":
-        packageName = "GOLF";
+        packageName = systemSettings.golf.packageName;
         break;
       case "spanish":
-        packageName = "ESPANOL";
+        packageName = systemSettings.mainCity.spanishPackageName;
         break;
       default:
         packageName = "UNDEFINED";
@@ -3298,7 +3298,7 @@ function buildHeader(){
     } else {
       //append all these mfs (i'll do it later)
       for(let e = 0; e < systemSettings.extraCity.cities.length; e++){
-        $('#slides-scroller .package-list').append(`<span class=" listElement shrinkY ${packageTotal === 0 && e === 0 ? "main": ""}${packageTotal === 1 && e === 0 ? "next": ""}">${systemSettings.extraCity.cities[e].scrollerName != undefined ? systemSettings.extraCity.cities[e].scrollerName.toUpperCase() : systemSettings.extraCity.cities[e].locationName.toUpperCase()}</span>`);
+        $('#slides-scroller .package-list').append(`<span class=" listElement shrinkY ${packageTotal === 0 && e === 0 ? "main": ""}${packageTotal === 1 && e === 0 ? "next": ""}">${systemSettings.extraCity.cities[e].packageName != "locname" ? systemSettings.extraCity.cities[e].packageName : systemSettings.extraCity.cities[e].locationName.toUpperCase()}</span>`);
         if (e != systemSettings.extraCity.cities.length-1) $('#slides-scroller .package-list').append(`<span class="shrinkY divider-arrow"> < </span>`);
       }
     }
