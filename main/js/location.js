@@ -194,6 +194,7 @@ async function getMainCity() {
 
         systemSettings.mainCity.icaoCode = icaoData.location.stationId[icId];
     }
+    ccTunnel = systemSettings.mainCity.icaoCode;
 }
 
 async function getNearbyCities() {
@@ -238,7 +239,7 @@ async function getNearbyCities() {
             /*if(data.location.locale["locale4"] != null){
                 if(!data.location.locale["locale4"].endsWith("Naval Air Station")){locName = data.location.locale["locale4"]}
             }*/
-            var cityObj = { obsName: locName, icaoCode: icao };
+            var cityObj = { obsName: locName, icaoCode: icao, header: "icaoCode=" + icao};
             for (let i = 0; i < newCities.length; i++) {
                 if (cityObj.obsName == systemSettings.mainCity.locationName) {
                     cityObj.icaoCode = systemSettings.mainCity.icaoCode;
@@ -290,6 +291,7 @@ async function getExtraCities() {
             },
             distance: dist
         }
+        extraCityObj.header = "icaoCode=" + extraCityObj.icaoCode;
         if (data.location.displayName == systemSettings.mainCity.locationName)return;/*{
             if(data.location.locale["locale4"] != null){
                 if(data.location.locale["locale4"].endsWith("Naval Air Station")) return;
@@ -551,6 +553,11 @@ async function locationJS() {
     if (systemSettings.systemLocation == "") {
         systemSettings.systemLocation = systemSettings.mainCity.locationName;
     }
+    if (systemSettings.mainCity.locationID != undefined){
+        systemSettings.mainCity.header = "geocode=" + await getCoordsLocID(systemSettings.mainCity.locationID);
+    }else{
+        systemSettings.mainCity.header = `icaoCode=${systemSettings.mainCity.icaoCode}`;
+    }
     $("#startup .locationname").text("location name: " + systemSettings.systemLocation)
     //main city radar
     if (systemSettings.mainCity.radar.auto == true) {
@@ -565,10 +572,26 @@ async function locationJS() {
     //nearby 8
     if (systemSettings.nearbyCities.autoFind == true) {
         await getNearbyCities()
+    } else {
+        for(let i = 0; i < systemSettings.nearbyCities.cities.length; i++){
+            if(systemSettings.nearbyCities.cities[i].locationID != undefined){
+                systemSettings.nearbyCities.cities[i].header = "geocode=" + await getCoordsLocID(systemSettings.nearbyCities.cities[i].locationID);
+            }else{
+                systemSettings.nearbyCities.cities[i].header = "icaoCode=" + systemSettings.nearbyCities.cities[i].icaoCode;
+            }
+        }
     }
     //extra
     if (systemSettings.extraCity.autoFind == true) {
         await getExtraCities()
+    } else {
+        for(let i = 0; i < systemSettings.extraCity.cities.length; i++){
+            if(systemSettings.extraCity.cities[i].locationID != undefined){
+                systemSettings.extraCity.cities[i].header = "geocode=" + await getCoordsLocID(systemSettings.extraCity.cities[i].locationID);
+            }else{
+                systemSettings.extraCity.cities[i].header = "icaoCode=" + systemSettings.extraCity.cities[i].icaoCode;
+            }
+        }
     }
     //extra radar
     await getExtraRadar()
@@ -580,6 +603,15 @@ async function locationJS() {
             lon: systemSettings.mainCity.lon,
             obsName: systemSettings.mainCity.obsName,
             icaoCode: systemSettings.mainCity.icaoCode
+        }
+        systemSettings.LBar.locations.cities[0].header = "icaoCode=" + systemSettings.LBar.locations.cities[0].icaoCode;
+    } else {
+        for(let i = 0; i < systemSettings.LBar.locations.cities.length; i++){
+            if(systemSettings.LBar.locations.cities[i].locationID != undefined){
+                systemSettings.LBar.locations.cities[i].header = "geocode=" + await getCoordsLocID(systemSettings.LBar.locations.cities[i].locationID);
+            }else{
+                systemSettings.LBar.locations.cities[i].header = "icaoCode=" + systemSettings.LBar.locations.cities[i].icaoCode;
+            }
         }
     }
     //lbar radar

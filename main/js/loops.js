@@ -40,7 +40,7 @@ var currentCCInterval
 function getlBarData(lbarLoc) {
   lBarData.cities[lbarLoc] = emptyLBarData();
   async function ccLBAR() {
-    var url = "https://api.weather.com/v3/wx/observations/current?icaoCode=" + systemSettings.LBar.locations.cities[lbarLoc].icaoCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
+    var url = "https://api.weather.com/v3/wx/observations/current?" + systemSettings.LBar.locations.cities[lbarLoc].header + "&units=e&language=en-US&format=json&apiKey=" + api_key
 
     const data = await $.getJSON(url);
 

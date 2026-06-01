@@ -437,7 +437,7 @@ async function getCoreData() {
 }
   getBulletinAlerts()
   async function getCurrent() {
-    var url = "https://api.weather.com/v3/wx/observations/current?icaoCode=" + systemSettings.mainCity.icaoCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
+    var url = "https://api.weather.com/v3/wx/observations/current?" + systemSettings.mainCity.header + "&units=e&language=en-US&format=json&apiKey=" + api_key
     const data = await $.getJSON(url)
 
     try {
@@ -467,7 +467,7 @@ async function getCoreData() {
   }
   getCurrent()
   async function getNearby(num) {
-    var url = "https://api.weather.com/v3/wx/observations/current?icaoCode=" + systemSettings.nearbyCities.cities[num].icaoCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
+    var url = "https://api.weather.com/v3/wx/observations/current?" + systemSettings.nearbyCities.cities[num].header + "&units=e&language=en-US&format=json&apiKey=" + api_key
     
     const data = await $.getJSON(url)
 
@@ -651,7 +651,7 @@ async function getCoreData() {
   }
   getExtended()
   async function getAlmanac() {
-    var url = "https://api.weather.com/v3/wx/almanac/daily/5day?icaoCode=" + systemSettings.mainCity.icaoCode + `&format=json&units=e&startDay=${dateFns.format(new Date(),"d")}&startMonth=${dateFns.format(new Date(),"M")}&apiKey=` + api_key
+    var url = "https://api.weather.com/v3/wx/almanac/daily/5day?" + systemSettings.mainCity.header + `&format=json&units=e&startDay=${dateFns.format(new Date(),"d")}&startMonth=${dateFns.format(new Date(),"M")}&apiKey=` + api_key
     
     const data = await $.getJSON(url)
 
@@ -795,7 +795,7 @@ function getExtraCore(locNum) {
 }
   getBulletinAlerts()
   async function getCurrent() {
-    var url = "https://api.weather.com/v3/wx/observations/current?icaoCode=" + systemSettings.extraCity.cities[locNum].icaoCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
+    var url = "https://api.weather.com/v3/wx/observations/current?" + systemSettings.extraCity.cities[locNum].header + "&units=e&language=en-US&format=json&apiKey=" + api_key
     var eLocData = {noReport:true,locationName:"",humidity:"",dewPoint:"",pressure:"",pressureTrend:"",wind:"",gusts:"",feelsLike:"",feelsLikeTitle:"",icon:"",condition:"",temperature:"",}
     
     const data = await $.getJSON(url)
@@ -991,7 +991,7 @@ function getExtraCore(locNum) {
 }
 function getSpanishData() {
   async function getCurrent() {
-    var url = "https://api.weather.com/v3/wx/observations/current?icaoCode=" + systemSettings.mainCity.icaoCode + "&units=e&language=es-US&format=json&apiKey=" + api_key
+    var url = "https://api.weather.com/v3/wx/observations/current?" + systemSettings.mainCity.header + "&units=e&language=es-US&format=json&apiKey=" + api_key
     const data = await $.getJSON(url)
 
     try {
