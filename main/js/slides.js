@@ -289,6 +289,7 @@ function switchProvider(type) {
     }
   }
 }
+
 function segmentSet() {
   if (weatherData.severemode == true) {
     $("#slides-scroller .package-list").empty()
@@ -333,16 +334,10 @@ function segmentSet() {
     if (lBarData.radarUnavailable) {
       $(".radar-lbar").fadeOut(0)
     } else {
-      //$(".radar-lbar .miniradar-shrink").css({"transform":"none"})
-      //$(".radar-lbar").fadeIn(0)
-      //miniradar.resize()
-      //miniEchoes.resize()
-      //miniradarAmenitiesTrans.resize()
-      //$(".radar-lbar .miniradar-shrink").css("transform","scaleY(0.83)")
-      //get new radar frames
-      if(gidx == 0) {
+      if (gidx == 0) {
         try {
-          if(miniRadarAnimation != undefined){clearInterval(miniRadarAnimation)}
+          if (miniRadarAnimation != undefined) {clearInterval(miniRadarAnimation)}
+          $(".radar-lbar").fadeIn(0)
           lBarData.radarUnavailable = false
           startMiniRadar();
         } catch (error) {
@@ -350,53 +345,34 @@ function segmentSet() {
           $(".radar-lbar").fadeOut(0)
         }
       }
-    
-    // setTimeout(() => {
-    //   if(gidx == 0) {
-    //     try {
-    //       if(miniRadarAnimation != undefined){clearInterval(miniRadarAnimation)}
-    //       lBarData.radarUnavailable = false
-    //       startMiniRadar();
-    //     } catch (error) {
-    //       lBarData.radarUnavailable = true
-    //       $(".radar-lbar").fadeOut(0)
-    //     }
-    //   }
-    // }, 6000);
     }
   }
   //sidebar severe functions
   if (orderidx == 0) {
     $(".obs-lbar .obs-ticker-severe").fadeOut(0)
     if (!lBarData.radarUnavailable) {
-      //$(".radar-lbar").fadeIn(0)
     }
   } else {
     $(".obs-lbar .obs-ticker-severe").fadeIn(0)
-    //$(".radar-lbar").fadeOut(0)
   }
+
   manageDurations()
-  //if(gidx >= (slideSettings.order[orderidx].slideLineup.length - 1)){
-    setTimeout(() => {
-        allData();
-        for(let i = 0; i < systemSettings.LBar.locations.cities.length; i++){
-          getlBarData(i);
-        }
-      //setTimeout(stopMiniRadar, 1000);
-    }, slideSettings.order[orderidx].slideLineup[gidx].duration * (slideSettings.order[orderidx].slideLineup[gidx].group == "extralocal" ? systemSettings.extraCity.cities.length : 1) - 4000);
-  //}
-    
+  
+  switchProvider()
+
+  if (slideSettings.order[orderidx].slideLineup[gidx].group != "intro") {
     sideBarLoop(0)
     forecastBarLoop(0)
-  switchProvider()
-  if (slideSettings.order[orderidx].slideLineup[gidx].group != "intro") {
+
     adCrawl(slideSettings.order[orderidx].slideLineup[gidx].duration, providerAdMessage, adImageIdx)
       $(".titlearrow").css("border-left", "47px solid " + arrowColors[slideSettings.order[orderidx].slideLineup[gidx].group])
       $("#slides-background").css({"background":`transparent url(images/backgrounds/` + groupBackgrounds[slideSettings.order[orderidx].slideLineup[gidx].group] + `.png) no-repeat`, "background-size": "100% 100%"});
   }
+
   if (slideSettings.order[orderidx].slideLineup[gidx].group == "extralocal") {
     $("#slides-background").css({"background":`transparent url(images/backgrounds/` + systemSettings.extraCity.cities[locationid].slidesBG + `.png) no-repeat`, "background-size": "100% 100%"});
   }
+
 }
 var slidePrograms = {
     /*INTRO*/
@@ -1208,7 +1184,6 @@ var slidePrograms = {
       }, slideSettings.order[orderidx].slideLineup[gidx].slides[idx].duration);
     },
     trafficOverview() {
-      console.log(slideSettings.order[orderidx].slideLineup[gidx].slides[idx].duration)
       $('.titletext').text("Traffic Overview")
       $('.headertext').text(systemSettings.traffic.locationName)
       var trafZoom = ((round < 1) ? systemSettings.traffic.zoomOut : systemSettings.traffic.zoomIn)
@@ -2840,6 +2815,9 @@ function showSlides() {
     if (gidx >= slideSettings.order[orderidx].slideLineup.length) {
       gidx = 0;
       allData();
+      for (let i = 0; i < systemSettings.LBar.locations.cities.length; i++) {
+        getlBarData(i);
+      }
       loadLbarLoc();
     }
     //check fro severe mode
@@ -2848,7 +2826,6 @@ function showSlides() {
     if (orderidx == 0) {
       headerRefresh();
     }
-    console.log("severemode", weatherData.severemode)
     segmentSet()
   }
   //console.log(slideSettings.order[orderidx].slideLineup[gidx].slides[idx].duration)
@@ -3209,8 +3186,6 @@ function manageDurations() {
     default:
       break;
   }
-
-  console.log("current package: ",slideSettings.order[orderidx].slideLineup[gidx])
 }
 function buildHeader(){
   //im guessing orderidx equaling 1 means severe weather mode
@@ -3310,11 +3285,15 @@ function buildHeader(){
 }
 function headerRefresh() {
   try {
-    if((slideSettings.order[orderidx].slideLineup[gidx-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[gidx].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoretwo")){
+    if ((slideSettings.order[orderidx].slideLineup[gidx-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[gidx].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoretwo")) {
       return;
-    }else if(slideSettings.order[orderidx].slideLineup[gidx-1].group == slideSettings.order[orderidx].slideLineup[gidx].group){return;}
-  } catch (error) {console.error(error)
-    if(gidx == 0 && ((slideSettings.order[orderidx].slideLineup[0].group == "forecast" || slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoretwo"))){return;}
+    } else if (slideSettings.order[orderidx].slideLineup[gidx-1].group == slideSettings.order[orderidx].slideLineup[gidx].group) {
+      return;
+    }
+  } catch (error) {
+    if (gidx == 0 && ((slideSettings.order[orderidx].slideLineup[0].group == "forecast" || slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoretwo"))){
+      return;
+    }
   }
 
   $('#slides-scroller span.main').removeClass("main");

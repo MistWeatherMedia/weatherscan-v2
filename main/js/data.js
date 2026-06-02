@@ -319,20 +319,22 @@ async function eachAlert(key) {//asynchornous, bcuz getJSON is an asynchronous f
     }
 }
 async function getCrawlAlerts() {
-  weatherData.severemode = false
-  console.log("crawlAlerts");
+  weatherData.severemode = false;
   var enableSev = weatherData.severemode;
+
+  var url = "https://api.weather.com/v3/alerts/headlines?geocode=" + systemSettings.mainCity.lat + "," + systemSettings.mainCity.lon + "&format=json&language=en-US&apiKey=" + api_key;
+
   try {
-    var url = "https://api.weather.com/v3/alerts/headlines?geocode=" + systemSettings.mainCity.lat + "," + systemSettings.mainCity.lon + "&format=json&language=en-US&apiKey=" + api_key;
     const data = await $.getJSON(url);
 
-    weatherData.crawlAlerts = {
-      locationName: (systemSettings.mainCity.bulletinName == "") ? systemSettings.mainCity.locationName + " Area" : systemSettings.mainCity.bulletinName,
-      warnings: []
-    };
+    if (data != undefined && data.alerts != undefined) {
+      weatherData.crawlAlerts = {
+        locationName: (systemSettings.mainCity.bulletinName == "") ? systemSettings.mainCity.locationName + " Area" : systemSettings.mainCity.bulletinName,
+        warnings: []
+      };
 
-    var array = []
-    if (data && data.alerts) {
+      var array = []
+
       for (var i = 0; i < data.alerts.length; i++) {
         var eventDesc = data.alerts[i].eventDescription;
 
@@ -357,13 +359,13 @@ async function getCrawlAlerts() {
       console.log("severenode crawlAlerts", weatherData.severemode)
       
     } else {
-      weatherData.crawlAlerts = { locationname: systemSettings.mainCity.locationName, warnings: [] };
+      weatherData.crawlAlerts = { locationName: systemSettings.mainCity.locationName, warnings: [] };
       weatherData.severemode = false;
     }
   } catch (error) {
     console.error(error)
 
-    weatherData.crawlAlerts = { locationname: systemSettings.mainCity.locationName, warnings: [] };
+    weatherData.crawlAlerts = { locationName: systemSettings.mainCity.locationName, warnings: [] };
     weatherData.severemode = false;
   }
 }
@@ -372,16 +374,18 @@ async function getCoreData() {
   var url = "https://api.weather.com/v3/alerts/headlines?geocode=" + systemSettings.mainCity.lat + "," + systemSettings.mainCity.lon + "&format=json&language=en-US&apiKey=" + api_key;
   weatherData.airQuality.ozoneAction = false
   weatherData.frostFreezeWarning = false
+
   try {
     const data = await $.getJSON(url);
 
-    weatherData.alerts.mainLoc = {
-      locationName:((systemSettings.mainCity.bulletinName == "") ? systemSettings.mainCity.locationName + " Area": systemSettings.mainCity.bulletinName), 
-      warnings:[]
-    }
+    if (data != undefined && data.alerts != undefined) {
+      weatherData.alerts.mainLoc = {
+        locationName:((systemSettings.mainCity.bulletinName == "") ? systemSettings.mainCity.locationName + " Area": systemSettings.mainCity.bulletinName), 
+        warnings:[]
+      }
 
-    var array = [];
-    if (data && data.alerts) {
+      var array = [];
+
       for (var i = 0; i < data.alerts.length; i++) {
         var eventDesc = data.alerts[i].eventDescription;
 
@@ -427,12 +431,12 @@ async function getCoreData() {
       console.log("All bulletin alerts fetched and sorted:", weatherData.alerts.mainLoc.warnings);
       
     } else {
-      weatherData.alerts.mainLoc = {locationname:systemSettings.mainCity.locationName,warnings:[], pages:0, alertsAmount:0}
+      weatherData.alerts.mainLoc = {locationName:systemSettings.mainCity.locationName,warnings:[], pages:0, alertsAmount:0}
     }
   } catch (error) {
     console.log("catch bulletin alerts error")
     console.error(error)
-    weatherData.alerts.mainLoc = {locationname:systemSettings.mainCity.locationName,warnings:[], pages:0,alertsAmount:0}
+    weatherData.alerts.mainLoc = {locationName:systemSettings.mainCity.locationName,warnings:[], pages:0,alertsAmount:0}
   }
 }
   getBulletinAlerts()
@@ -730,19 +734,18 @@ function getExtraCore(locNum) {
   var url = "https://api.weather.com/v3/alerts/headlines?geocode=" + systemSettings.extraCity.cities[locNum].lat + "," + systemSettings.extraCity.cities[locNum].lon + "&format=json&language=en-US&apiKey=" + api_key;
   weatherData.airQuality.ozoneAction = false
   weatherData.frostFreezeWarning = false
-    
-  const data = await $.getJSON(url);
-
+  
   try {
-    
+    const data = await $.getJSON(url);
 
-    weatherData.alerts.extraLoc[locNum] = {
-      locationName:((systemSettings.extraCity.cities[locNum].bulletinName == "") ? systemSettings.extraCity.cities[locNum].locationName + " Area": systemSettings.extraCity.cities[locNum].bulletinName), 
-      warnings:[]
-    }
+    if (data != undefined && data.alerts != undefined) {
+      weatherData.alerts.extraLoc[locNum] = {
+        locationName:((systemSettings.extraCity.cities[locNum].bulletinName == "") ? systemSettings.extraCity.cities[locNum].locationName + " Area": systemSettings.extraCity.cities[locNum].bulletinName), 
+        warnings:[]
+      }
 
-    var array = [];
-    if (data && data.alerts) {
+      var array = [];
+
       for (var i = 0; i < data.alerts.length; i++) {
         var eventDesc = data.alerts[i].eventDescription;
         
@@ -783,7 +786,7 @@ function getExtraCore(locNum) {
       }
       
     } else {
-      weatherData.alerts.extraLoc[locNum] = {locationname:systemSettings.extraCity.cities[locNum].locationName,warnings:[], pages:0}
+      weatherData.alerts.extraLoc[locNum] = {locationName:systemSettings.extraCity.cities[locNum].locationName,warnings:[], pages:0}
       weatherData.alerts.extraLoc[locNum].alertsAmount = 0
     }
   } catch (error) {
@@ -2598,15 +2601,11 @@ async function allData() {
   if (systemSettings.packageSettings.includes("spanish")) {
     await getSpanishData()
   }
-  //initializeRadar(locradar)
-  //initializeRadar(satradar)
-  //initializeRadar(regradar)
-  //console.log("weatherData data.js", weatherData)
-  //}, 5000);
 }
 async function startPrograms() {
   try {
     await initializeRadars()//creates radar maps
+
     $(".radar-lbar .miniradar-shrink").css({"transform":"none"})
     $(".radar-lbar").fadeIn(0)
     miniradar.resize()
@@ -2630,13 +2629,14 @@ async function startPrograms() {
 }
 
 setInterval(function () {
-    var today = new Date();
-    var date = today.toString().replace('01', '1').replace('02', '2').replace('03', '3').replace('04', '4').replace('05', '5').replace('06', '6').replace('07', '7').replace('08', '8').replace('09', '9').slice(4,10).trimRight() 
-    var time = today.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric', second: 'numeric'}).replace(/ /g,' ').toLowerCase().replaceAll(" ", "")
-    if(systemSettings.mainCity.timeZone != undefined){
-      date = today.toLocaleDateString('en-US', {month: 'short', 'day': 'numeric', timeZone: systemSettings.mainCity.timeZone});
-      time = today.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric', second: 'numeric', timeZone: systemSettings.mainCity.timeZone}).replace(/ /g,' ').toLowerCase().replaceAll(" ", "")
-    }
-    var spacer = ((time.length > 7) ? " " : "  ")
-    $('#date-time').text(date + "\n" + time);
-  }, 1000);
+  var today = new Date();
+  var date = today.toString().replace('01', '1').replace('02', '2').replace('03', '3').replace('04', '4').replace('05', '5').replace('06', '6').replace('07', '7').replace('08', '8').replace('09', '9').slice(4,10).trimRight() 
+  var time = today.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric', second: 'numeric'}).replace(/ /g,' ').toLowerCase().replaceAll(" ", "")
+  
+  if (systemSettings.mainCity.timeZone != undefined) {
+    date = today.toLocaleDateString('en-US', {month: 'short', 'day': 'numeric', timeZone: systemSettings.mainCity.timeZone});
+    time = today.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric', second: 'numeric', timeZone: systemSettings.mainCity.timeZone}).replace(/ /g,' ').toLowerCase().replaceAll(" ", "")
+  }
+
+  $('#date-time').text(date + "\n" + time);
+}, 1000);

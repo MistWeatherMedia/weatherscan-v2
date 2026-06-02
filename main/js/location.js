@@ -544,22 +544,29 @@ async function getGardenLoc(lat, lon, name) {
 }
 
 var mainquery = ""
+
 async function locationJS() {
     mainquery = window.location.search == "" ? undefined : window.location.search.replaceAll("?", "").replaceAll("%20", " ");
+    
     //main city
     if (systemSettings.mainCity.autoFind == true) {
         await getMainCity()
     }
-    //startup location name
-    if (systemSettings.systemLocation == "") {
-        systemSettings.systemLocation = systemSettings.mainCity.locationName;
-    }
+    
     if (systemSettings.mainCity.locationID != undefined){
         systemSettings.mainCity.header = "geocode=" + await getCoordsLocID(systemSettings.mainCity.locationID);
     }else{
         systemSettings.mainCity.header = `icaoCode=${systemSettings.mainCity.icaoCode}`;
     }
+
+    //startup location name
+    if (systemSettings.systemLocation == "") {
+        systemSettings.systemLocation = systemSettings.mainCity.locationName;
+    }
+
+    //system locationname
     $("#startup .locationname").text("location name: " + systemSettings.systemLocation)
+
     //main city radar
     if (systemSettings.mainCity.radar.auto == true) {
         systemSettings.mainCity.radar.lat = systemSettings.mainCity.lat;
@@ -570,6 +577,7 @@ async function locationJS() {
             { locationName: systemSettings.mainCity.locationName, dotTopPos: "518", dotLeftPos: "788", nameTopMargin: "-11", nameLeftMargin: "43" }
         ]
     }
+
     //nearby 8
     if (systemSettings.nearbyCities.autoFind == true) {
         await getNearbyCities()
@@ -582,6 +590,7 @@ async function locationJS() {
             }
         }
     }
+
     //extra
     if (systemSettings.extraCity.autoFind == true) {
         await getExtraCities()
@@ -594,8 +603,10 @@ async function locationJS() {
             }
         }
     }
+
     //extra radar
     await getExtraRadar()
+
     //lbar
     if (systemSettings.LBar.locations.autoFind == true) {
         systemSettings.LBar.locations.cities[0] = {
@@ -615,6 +626,7 @@ async function locationJS() {
             }
         }
     }
+    
     //lbar radar
     if (systemSettings.LBar.radar.auto == true) {
         systemSettings.LBar.radar.lat = systemSettings.LBar.locations.cities[0].lat
