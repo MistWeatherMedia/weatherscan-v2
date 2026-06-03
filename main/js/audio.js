@@ -67,14 +67,6 @@ class AudioManager {
 
     buildPlaylist() {
         const musicPath = 'music/';
-
-        systemSettings.audioSettings.order.forEach(order => {
-            this.playlist.push(
-                `${musicPath}Track ${order}.mp3`
-            );
-        });
-        /*
-        const musicPath = 'music/';
         const v1MusicPath = 'music/v1/';
 
         systemSettings.audioSettings.order.forEach(order => {
@@ -88,7 +80,6 @@ class AudioManager {
                 );
             }
         });
-        */
     }
 
     playMusicLoop() {
