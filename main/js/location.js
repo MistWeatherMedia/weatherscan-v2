@@ -123,7 +123,7 @@ var travelRegional = [
     { locationName: "New Orleans", lat: 29.951, lon: -90.072, topPos: 2550, leftPos: 4100 },
     { locationName: "Mobile", lat: 30.695, lon: -88.043, topPos: 2530, leftPos: 4400 },
     { locationName: "Tallahassee", lat: 30.438, lon: -84.281, topPos: 2500, leftPos: 4700 },
-    { locationName: "Jacksonville", lat: 30.332, lon: -81.656, topPos: 2537, leftPos: 5080, type: ["atlantic"] },
+    { locationName: "Jacksonville", lat: 30.332, lon: -81.656, topPos: 2537, leftPos: 5080, type: ["atlantic", null] },
     { locationName: "Orlando", lat: 28.538, lon: -81.379, topPos: 2730, leftPos: 5075 },
     { locationName: "Tampa", lat: 27.951, lon: -82.457, topPos: 2750, leftPos: 4850 },
     { locationName: "Fort Myers", lat: 26.640, lon: -81.872, topPos: 2955, leftPos: 4960 },
@@ -147,7 +147,7 @@ var travelRegional = [
     { locationName: "Norfolk", lat: 36.851, lon: -76.286, topPos: 1850, leftPos: 5600 },
     { locationName: "Washington", lat: 38.907, lon: -77.037, topPos: 1645, leftPos: 5445 },
     { locationName: "Philadelphia", lat: 39.953, lon: -75.165, topPos: 1490, leftPos: 5580 },
-    { locationName: "Atlantic City", lat: 39.364, lon: -74.422, topPos: 1690, leftPos: 5800, type: ["atlantic"] },
+    { locationName: "Atlantic City", lat: 39.364, lon: -74.422, topPos: 1690, leftPos: 5800, type: ["atlantic", null] },
     { locationName: "New York", lat: 40.713, lon: -74.006, topPos: 1400, leftPos: 5840 },
     { locationName: "Burlington", lat: 44.476, lon: -73.214, topPos: 1005, leftPos: 5900 },
     { locationName: "Watertown", lat: 43.975, lon: -75.910, topPos: 1060, leftPos: 5605 },
@@ -178,7 +178,7 @@ async function getMainCity() {
         var icaoURL = `https://api.weather.com/v3/location/near?geocode=${data.lat},${data.lon}&product=observation&format=json&apiKey=${systemSettings.apiKeys.api_key}`
         const icaoData = await $.getJSON(icaoURL)
 
-        var icId = 0
+        var icID = 0
         for (var i = 0; i < icaoData.location.stationId.length; i++) {
             if (icaoData.location.stationId[i].length > 4) {icID++} else {
                 break
@@ -192,7 +192,7 @@ async function getMainCity() {
         systemSettings.mainCity.lat = data.lat;
         systemSettings.mainCity.lon = data.lon;
 
-        systemSettings.mainCity.icaoCode = icaoData.location.stationId[icId];
+        systemSettings.mainCity.icaoCode = icaoData.location.stationId[icID];
     }
     ccTunnel = systemSettings.mainCity.icaoCode;
 }

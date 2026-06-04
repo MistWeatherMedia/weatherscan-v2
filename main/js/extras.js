@@ -3819,9 +3819,10 @@ function getTravelMapLimits(type) {
     if (type[0] == "pacific" && type[1] == "north") {
         return [120, -340, 310, -1050];
     }
-    // if(type[0] == "atlantic" && type[1] == null){
-    //     return [225, -225, 1085, -285]
-    // }
+    if(type[0] == "atlantic" && type[1] == null){
+        return [225, -225, 1085, -285]
+    }
+        return [225, -225, 685, -685];
 }
 
 var extraSlides = {
