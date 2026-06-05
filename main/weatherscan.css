@@ -317,9 +317,9 @@ img#mist-logo {
 }
 .provider {
     position: absolute;
-    bottom: 80px;
-    right: 1126px;
-    height: 65px;
+    bottom: 79px;
+    right: 1116px;
+    height: 69px;
     z-index: 10;
     scale: 1.4;
     display: none;
@@ -551,7 +551,7 @@ img#mist-logo {
 .radar-lbar .cities .city .dot {
   position: absolute;
   z-index: 0;
-  background: transparent url(images/assets/locatorDotSmall.png) no-repeat;
+  background: transparent url(images/assets/locatorDotsmall.png) no-repeat;
   background-size: 100% 100%;
 }
 .radar-lbar .cities .city .dot-outline {
@@ -580,7 +580,7 @@ img#mist-logo {
     color: rgba(230, 230, 230);
     -webkit-text-stroke: rgba(20, 20, 20, 1);
     -webkit-text-stroke-width: 1px;
-    text-shadow: 2px 3px 1px rgba(20, 20, 20, 1);
+    text-shadow: 2px 4px 1px rgba(20, 20, 20, 1);
     white-space: pre;
     z-index: 0;
 }
@@ -593,7 +593,7 @@ img#mist-logo {
     color: rgba(230, 230, 230, 1);
     -webkit-text-stroke: rgba(20, 20, 20, 1);
     -webkit-text-stroke-width: 1px;
-    text-shadow: 2px 3px 1px rgba(20, 20, 20, 1);
+    text-shadow: 2px 4px 1px rgba(20, 20, 20, 1);
     white-space: pre;
     z-index: 2;
     opacity: 70%;
@@ -1183,7 +1183,7 @@ img#mist-logo {
     position: absolute;
     top: 900px;
     left: 504px;
-    background-image: linear-gradient(to left, rgba(53,53,53,0) 0, rgba(53,53,53, 1) 39px 100%);
+    background-image: url("/images/misc/tickerArrow.png"), linear-gradient(to left, rgba(53,53,53,0) 0, rgba(53,53,53, 1) 39px 100%);
     z-index: 1;
     height: 41.5px;
 }
