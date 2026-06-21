@@ -336,13 +336,14 @@ async function getCrawlAlerts() {
       var array = []
 
       for (var i = 0; i < data.alerts.length; i++) {
+        if(warningSettings[eventDesc] != undefined){continue;}
         var eventDesc = data.alerts[i].eventDescription;
 
-        if (warningSettings[eventDesc].severe) {
+        if (warningSettings[eventDesc] != undefined && warningSettings[eventDesc].severe) {
           enableSev = true;
         }
 
-        if (warningSettings[eventDesc].included) {
+        if (warningSettings[eventDesc] != undefined && warningSettings[eventDesc].included) {
           array.push(await eachAlert(data.alerts[i].detailKey));
         }
       }
@@ -407,7 +408,7 @@ async function getCoreData() {
           }
         }
 
-        if (warningSettings[eventDesc].included) {
+        if (warningSettings[eventDesc] != undefined && warningSettings[eventDesc].included) {
           await addAlert();
         }
       }
@@ -762,7 +763,7 @@ function getExtraCore(locNum) {
           }
         }
         
-        if (warningSettings[eventDesc].included) {
+        if (warningSettings[eventDesc] != undefined && warningSettings[eventDesc].included) {
           await addAlert();
         }
       }

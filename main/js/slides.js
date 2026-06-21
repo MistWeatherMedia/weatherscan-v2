@@ -355,7 +355,13 @@ function segmentSet() {
   } else {
     $(".obs-lbar .obs-ticker-severe").fadeIn(0)
   }
-
+  setTimeout(() => {
+    if (slideSettings.order[orderidx].slideLineup[gidx].group != "extralocal"){ return; }
+    allData();
+    for (let i = 0; i < systemSettings.LBar.locations.cities.length; i++) {
+      getlBarData(i);
+    }
+  }, slideSettings.order[orderidx].slideLineup[gidx].duration-3500);
   manageDurations()
   
   switchProvider()
@@ -2814,10 +2820,6 @@ function showSlides() {
     $('.titlearrow').fadeIn(0)
     if (gidx >= slideSettings.order[orderidx].slideLineup.length) {
       gidx = 0;
-      allData();
-      for (let i = 0; i < systemSettings.LBar.locations.cities.length; i++) {
-        getlBarData(i);
-      }
       loadLbarLoc();
     }
     //check fro severe mode
