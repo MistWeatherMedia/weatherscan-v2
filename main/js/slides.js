@@ -356,7 +356,7 @@ function segmentSet() {
     $(".obs-lbar .obs-ticker-severe").fadeIn(0)
   }
   setTimeout(() => {
-    if (slideSettings.order[orderidx].slideLineup[gidx].group != "extralocal"){ return; }
+    if (slideSettings.order[orderidx].slideLineup[gidx].group == "extralocal"){ return; }
     allData();
     for (let i = 0; i < systemSettings.LBar.locations.cities.length; i++) {
       getlBarData(i);
@@ -3203,7 +3203,12 @@ function buildHeader(){
     if (n >= slideSettings.order[orderidx].slideLineup.length) {n = 0}
     let packageName = "";
     try {
-      if((slideSettings.order[orderidx].slideLineup[i].group == "forecast" || slideSettings.order[orderidx].slideLineup[i].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[i].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[n].group == "forecast" || slideSettings.order[orderidx].slideLineup[n].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[n].group == "minicoretwo")){
+      if((slideSettings.order[orderidx].slideLineup[i].group == "forecast" || 
+        slideSettings.order[orderidx].slideLineup[i].group == "minicoreone" || 
+        slideSettings.order[orderidx].slideLineup[i].group == "minicoretwo") && 
+        (slideSettings.order[orderidx].slideLineup[n].group == "forecast" || 
+          slideSettings.order[orderidx].slideLineup[n].group == "minicoreone" || 
+          slideSettings.order[orderidx].slideLineup[n].group == "minicoretwo")){
         continue;
       }else if(slideSettings.order[orderidx].slideLineup[i].group == slideSettings.order[orderidx].slideLineup[n].group){continue;}
     } catch (error) {
@@ -3211,7 +3216,12 @@ function buildHeader(){
       //absolutely nothing
     }
     if(i == slideSettings.order[0].slideLineup.length - 1){
-      if((slideSettings.order[orderidx].slideLineup[i].group == "forecast" || slideSettings.order[orderidx].slideLineup[i].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[i].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[0].group == "forecast" || slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo")){
+      if((slideSettings.order[orderidx].slideLineup[i].group == "forecast" || 
+        slideSettings.order[orderidx].slideLineup[i].group == "minicoreone" || 
+        slideSettings.order[orderidx].slideLineup[i].group == "minicoretwo") && 
+        (slideSettings.order[orderidx].slideLineup[0].group == "forecast" || 
+          slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || 
+          slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo")){
         $('#slides-scroller .package-list .divider-arrow').last().remove();
         break;
       }
@@ -3284,16 +3294,29 @@ function buildHeader(){
     }
     packageTotal++;
   }
+  if($('#slides-scroller .package-list').children().last().hasClass('divider-arrow')){
+    $('#slides-scroller .package-list .divider-arrow').last().remove();
+  }
 }
 function headerRefresh() {
   try {
-    if ((slideSettings.order[orderidx].slideLineup[gidx-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[gidx].group == "forecast" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[gidx].group == "minicoretwo")) {
+    if ((slideSettings.order[orderidx].slideLineup[gidx-1].group == "forecast" || 
+      slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoreone" || 
+      slideSettings.order[orderidx].slideLineup[gidx-1].group == "minicoretwo") && 
+      (slideSettings.order[orderidx].slideLineup[gidx].group == "forecast" || 
+        slideSettings.order[orderidx].slideLineup[gidx].group == "minicoreone" || 
+        slideSettings.order[orderidx].slideLineup[gidx].group == "minicoretwo")) {
       return;
     } else if (slideSettings.order[orderidx].slideLineup[gidx-1].group == slideSettings.order[orderidx].slideLineup[gidx].group) {
       return;
     }
   } catch (error) {
-    if (gidx == 0 && ((slideSettings.order[orderidx].slideLineup[0].group == "forecast" || slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo") && (slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "forecast" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoreone" || slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoretwo"))){
+    if (gidx == 0 && ((slideSettings.order[orderidx].slideLineup[0].group == "forecast" || 
+      slideSettings.order[orderidx].slideLineup[0].group == "minicoreone" || 
+      slideSettings.order[orderidx].slideLineup[0].group == "minicoretwo") && 
+      (slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "forecast" || 
+        slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoreone" || 
+        slideSettings.order[orderidx].slideLineup[slideSettings.order[orderidx].slideLineup.length-1].group == "minicoretwo"))){
       return;
     }
   }

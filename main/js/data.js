@@ -356,8 +356,8 @@ async function getCrawlAlerts() {
 
       weatherData.severemode = enableSev
       
-      console.log("All crawl alerts fetched and sorted:", weatherData.crawlAlerts.warnings);
-      console.log("severenode crawlAlerts", weatherData.severemode)
+      //console.log("All crawl alerts fetched and sorted:", weatherData.crawlAlerts.warnings);
+      //console.log("severenode crawlAlerts", weatherData.severemode)
       
     } else {
       weatherData.crawlAlerts = { locationName: systemSettings.mainCity.locationName, warnings: [] };
@@ -429,7 +429,7 @@ async function getCoreData() {
         weatherData.alerts.mainLoc.pages = 2
       }
       
-      console.log("All bulletin alerts fetched and sorted:", weatherData.alerts.mainLoc.warnings);
+      //console.log("All bulletin alerts fetched and sorted:", weatherData.alerts.mainLoc.warnings);
       
     } else {
       weatherData.alerts.mainLoc = {locationName:systemSettings.mainCity.locationName,warnings:[], pages:0, alertsAmount:0}
@@ -772,7 +772,7 @@ function getExtraCore(locNum) {
 
       weatherData.alerts.extraLoc[locNum].warnings = array;
       
-      console.log("All extra bulletin alerts fetched and sorted:", weatherData.alerts.extraLoc[locNum].warnings);
+      //console.log("All extra bulletin alerts fetched and sorted:", weatherData.alerts.extraLoc[locNum].warnings);
 
       var atext = ""
       $(".gbul .alerts").text("")
