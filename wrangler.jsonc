@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "weatherscan-v2-workers",
+  "compatibility_date": "2026-07-27",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "main"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
