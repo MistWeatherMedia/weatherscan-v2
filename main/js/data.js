@@ -576,7 +576,7 @@ async function getCoreData() {
           weatherData.dayPart.english.mainLoc.header = "Tomorrow's Forecast"
           targetHours = [6, 12, 15, 17]; break;
         default:
-          weatherData.dayPart.english.mainLoc.header = "Today's Forecast"
+          weatherData.dayPart.english.mainLoc.header = "Tomorrow's Forecast"
           targetHours = [6, 12, 15, 17]
       }
      var ii = 0
@@ -614,7 +614,7 @@ async function getCoreData() {
         case (currenthr < 20):
           weatherData.dayPart.english.mainLoc.header = "Tomorrow's Forecast"
         default:
-          weatherData.dayPart.english.mainLoc.header = "Today's Forecast"
+          weatherData.dayPart.english.mainLoc.header = "Tomorrow's Forecast"
       }
       weatherData.dayPart.english.mainLoc.locationName = systemSettings.mainCity.locationName
       weatherData.dayPart.english.mainLoc.noReport = true
@@ -909,7 +909,7 @@ function getExtraCore(locNum) {
           elocData.header = "Tomorrow's Forecast"
           targetHours = [6, 12, 15, 17]; break;
         default:
-          elocData.header = "Today's Forecast"
+          elocData.header = "Tomorrow's Forecast"
           targetHours = [6, 12, 15, 17]
       }
      var ii = 0
@@ -947,7 +947,7 @@ function getExtraCore(locNum) {
         case (currenthr < 20):
           elocData.header = "Tomorrow's Forecast"
         default:
-          elocData.header = "Today's Forecast"
+          elocData.header = "Tomorrow's Forecast"
       }
       elocData.locationName = systemSettings.extraCity.cities[locNum].locationName
       elocData.noReport = true
