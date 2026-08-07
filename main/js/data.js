@@ -336,7 +336,6 @@ async function getCrawlAlerts() {
       var array = []
 
       for (var i = 0; i < data.alerts.length; i++) {
-        if(warningSettings[eventDesc] != undefined){continue;}
         var eventDesc = data.alerts[i].eventDescription;
 
         if (warningSettings[eventDesc] != undefined && warningSettings[eventDesc].severe) {
