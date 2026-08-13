@@ -3178,11 +3178,18 @@ function manageDurations() {
           { duration: [14000,11000], function: "trafficFlow" },
         ]
       } else {
-        slideSettings.order[orderidx].slideLineup[gidx].slides = [
-          { duration: 4000, function: "trafficIntro" },
-          { duration: [13000,10000], function: "trafficOverview" },
-          { duration: [23000,10000], function: "trafficFlow" },
-        ]
+        if (weatherData.trafficFlow.noReport == true) {
+          slideSettings.order[orderidx].slideLineup[gidx].slides = [
+            { duration: 4000, function: "trafficIntro" },
+            { duration: [28000,28000], function: "trafficOverview" },
+          ]
+        } else {
+          slideSettings.order[orderidx].slideLineup[gidx].slides = [
+            { duration: 4000, function: "trafficIntro" },
+            { duration: [13000,10000], function: "trafficOverview" },
+            { duration: [23000,10000], function: "trafficFlow" },
+          ]
+        }
       }
       break;
     default:

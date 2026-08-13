@@ -1138,11 +1138,12 @@ function getSpanishData() {
 }
 async function getTrafficData() {
   async function getTrafficReport() {
+    try {
     var trafurl = "https://data.traffic.hereapi.com/v7/incidents?in=circle:" + systemSettings.traffic.lat + "," + systemSettings.traffic.lon + ";r=4000&locationReferencing=tmc&lang=en-US&type=construction,accident&apiKey=" + traf_key
     
     const data = await $.getJSON(trafurl)
 
-    try {
+    
       var spacer = {"LOW IMPACT":"                     ", "MEDIUM IMPACT":"                            ", "HIGH IMPACT":"                      "}
       weatherData.trafficReport.incidents = []
       weatherData.trafficReport.noReport = false
@@ -1177,13 +1178,12 @@ async function getTrafficData() {
   getTrafficReport()
 
   async function getTrafficFlow(routenum) {
+    var flowObj = {routeIcon:"",from:"",to:"",speed:"",baseSpeed:"",travelTime:"",color:"",mph:""}
+    try {
     var url = "https://router.hereapi.com/v8/routes?transportMode=car&origin=" + systemSettings.traffic.routes[routenum].from + "&destination=" + systemSettings.traffic.routes[routenum].to + "&return=summary,travelSummary,polyline&apiKey=" + traf_key
     
     const data = await $.getJSON(url)
 
-    var flowObj = {routeIcon:"",from:"",to:"",speed:"",baseSpeed:"",travelTime:"",color:"",mph:""}
-
-    try {
       weatherData.trafficFlow.locationName = systemSettings.traffic.locationName
       weatherData.trafficFlow.noReport = false
       
@@ -1306,11 +1306,11 @@ async function getTravelData() {
 }
 function getHealthData() {
   async function getOdActivityData() {
+    try {
     var url = "https://api.weather.com/v3/wx/forecast/daily/5day?geocode=" + systemSettings.health.lat + "," + systemSettings.health.lon + "&format=json&units=e&language=en-US&apiKey=" + api_key
     
     const data = await $.getJSON(url)
     
-    try {
       var today = longWeekDays[new Date().getDay()] 
       var ii = 0
       var dpi = 0

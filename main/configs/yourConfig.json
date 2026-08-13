@@ -10,13 +10,11 @@
             "nationalConfig":false,
             "iconSet":"2010",
             "providerName":"Mist Digital Cable",
-            "startupTime":15000,
             "crawlMode":"both",
             "adMessage":["network"],
             "providerType":"provider",
             "providerImage":"mistdc",
             "adImages":[],
-            "version":"1.0.0",
             "backgroundImage":"wxscan_default_bg_new",
             "condensedCrawlFont": {
               "adCrawl": false,
