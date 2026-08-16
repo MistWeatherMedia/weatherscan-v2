@@ -377,6 +377,7 @@ img#mist-logo {
     color: rgba(20, 20, 20, 255);
     text-shadow: none !important;
     width: 340px;
+    white-space: pre;
 }
 .lbar-noreport {
     position: absolute;
