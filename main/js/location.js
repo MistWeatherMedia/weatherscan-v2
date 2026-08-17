@@ -564,6 +564,19 @@ async function locationJS() {
         systemSettings.systemLocation = systemSettings.mainCity.locationName;
     }
 
+    // Use the main city for the traffic overview when no separate traffic
+    // location has been configured. Empty coordinates otherwise become 0, 0
+    // in Mapbox and render an ocean-only map.
+    if (systemSettings.traffic.locationName == null || String(systemSettings.traffic.locationName).trim() == "") {
+        systemSettings.traffic.locationName = systemSettings.mainCity.locationName;
+    }
+    if (systemSettings.traffic.lat == null || systemSettings.traffic.lat === "" || !Number.isFinite(Number(systemSettings.traffic.lat))) {
+        systemSettings.traffic.lat = systemSettings.mainCity.lat;
+    }
+    if (systemSettings.traffic.lon == null || systemSettings.traffic.lon === "" || !Number.isFinite(Number(systemSettings.traffic.lon))) {
+        systemSettings.traffic.lon = systemSettings.mainCity.lon;
+    }
+
     //system locationname
     $("#startup .locationname").text("location name: " + systemSettings.systemLocation)
 
