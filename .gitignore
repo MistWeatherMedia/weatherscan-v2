@@ -16,6 +16,8 @@ myConfig-jenson.json
 myConfig-colster.json
 national.json
 
+ignore/
+
 test/
 lamberttest3/
 

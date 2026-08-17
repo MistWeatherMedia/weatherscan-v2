@@ -333,7 +333,7 @@ function initializeRadars() {
   try {
     trafficMap = new mapboxgl.Map({
       container: 'trafmap',
-      style: "utilities/style.json",
+      style: "mapbox://styles/colster/cmrgo0laa007z01s7bpym4u63",
       center: [0, 0],
       zoom: 7.2,
       trackResize: false,
