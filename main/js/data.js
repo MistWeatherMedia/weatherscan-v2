@@ -680,7 +680,7 @@ async function getCoreData() {
 
   async function getMoons() {
         var ii = 0
-        var firstURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format(new Date(),"M")}&year=${dateFns.format(new Date(),"yyyy")}`
+        var firstURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format(new Date(),"M")}&year=${dateFns.format(new Date(),"YYYY")}`
         
         const firstData = await $.getJSON(firstURL)
 
@@ -704,7 +704,7 @@ async function getCoreData() {
         }
 
         if (weatherData.almanac.moonphases[3].date == "") {
-          var secondURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format((dateFns.addMonths(new Date(),1)),"M")}&year=${dateFns.format(dateFns.addMonths(new Date(),1),"yyyy")}`
+          var secondURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format((dateFns.addMonths(new Date(),1)),"M")}&year=${dateFns.format(dateFns.addMonths(new Date(),1),"YYYY")}`
           const secondData = await $.getJSON(secondURL)
 
           try {
