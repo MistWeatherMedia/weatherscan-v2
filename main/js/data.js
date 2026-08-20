@@ -1056,7 +1056,7 @@ function getSpanishData() {
           weatherData.dayPart.spanish.header = "Pronóstico para mañana"
           targetHours = [6, 12, 15, 17]; break;
         default:
-          weatherData.dayPart.spanish.header = "Pronóstico de hoy"
+          weatherData.dayPart.spanish.header = "Pronóstico para mañana"
           targetHours = [6, 12, 15, 17]
       }
      var ii = 0
@@ -1094,7 +1094,7 @@ function getSpanishData() {
         case (currenthr < 20):
           weatherData.dayPart.spanish.header = "Pronóstico para mañana"
         default:
-          weatherData.dayPart.spanish.header = "Pronóstico de hoy"
+          weatherData.dayPart.spanish.header = "Pronóstico para mañana"
       }
       weatherData.dayPart.spanish.locationName = systemSettings.mainCity.locationName
       weatherData.dayPart.spanish.noReport = true
