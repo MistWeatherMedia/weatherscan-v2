@@ -1190,6 +1190,7 @@ img#mist-logo {
 }
 .normal-lowerarea .ticker span {
   padding-right: 57.6px;
+  white-space: pre;
 }
 .normal-lowerarea .crawl-background {
     position: absolute;

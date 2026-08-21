@@ -127,7 +127,7 @@ function ccTickerLoop(idx){
             if (systemSettings.LBar.ccTicker.travelCities.length < 1) {textString = "off"}
             toggleCCticker(textString)
             for(let i = 0; i < localTickerData.travelCities.forecast.cities.length; i++){
-                textString = textString + `<span class="shrinkY">${localTickerData.travelCities.forecast.cities[i].locationName}: ${localTickerData.travelCities.forecast.cities[i].temp} ${localTickerData.travelCities.forecast.cities[i].cond}</span>`;
+                textString = textString + `<span class="shrinkY">${localTickerData.travelCities.forecast.cities[i].locationName}: ${localTickerData.travelCities.forecast.cities[i].temp}  ${localTickerData.travelCities.forecast.cities[i].cond}</span>`;
             }
         }
     }
