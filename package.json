@@ -12,5 +12,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Mist Weather Media"
+  "author": "Mist Weather Media",
+  "overrides": {
+    "path-to-regexp": "8.4.0"
+  }
 }
