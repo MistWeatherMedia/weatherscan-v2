@@ -2,6 +2,14 @@
 
 Report bugs and other issues through the repository's Issues tab.
 
+## August 20-21, 2026
+
+- Adjusted the year formatting used by almanac moon-phase API requests.
+- Corrected late-day Spanish forecast headers to display "Pronóstico para mañana."
+- Added support for "Overnight" periods in Coastal Waters Forecast parsing.
+- Fixed tee-time forecasts using the main-city name instead of the configured golf location name.
+- Changed narration and image references to relative paths so the simulator works when hosted under a URL subpath.
+
 ## August 16, 2026
 
 - Fixed double-line location names in the LBar.
