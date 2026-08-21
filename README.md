@@ -29,14 +29,13 @@ Need support beyond the scope of this README? A guide for configuring this simul
 # Initial Setup (Source code)
 
 1. Install [node.js LTS](https://nodejs.org/en/).
-2. Acquire *weather.com*, *mapbox.com*, *developer.tomtom*, and *HERE.com* . API keys. These are required for weather data, radar frames, and traffic, respectively.
-3. Go to `/main/configs` and open `yourConfig.json`.
-4. Line 4 is where your *weather.com*  API key goes. Replace `"YOUR_API_KEY"` with your *weather.com* API key.
-5. Line 5 is where your *mapbox.com*  API key goes. Replace `"YOUR_API_KEY"` with your *mapbox.com* API key.
-7. Line 7 is where your *HERE.com*  API key goes. Replace `"YOUR_API_KEY"` with your *HERE.com* API key. (optional, only if you want the traffic segment, leaving blank will erase the traffic segment from your lineup)
-8. Save your changes to `yourConfig.json` and close it.
-9. In terminal / command prompt within the main directory, run `npm install --production`. This will install all dependencies required to run.
-10. In terminal / command prompt within the main directory, run `npm start`. This will start a local web server, which is required to run the sim.
+2. Go to `/main/configs` and open `yourConfig.json`.
+4. You can look through the options and change anything if needed.
+5. If you want the traffic segment, Line 7 is where your *HERE.com* API key would go. Replace `"YOUR_API_KEY"` with that API key. Again, this is optional and only if you want the traffic segment - leaving it blank will erase the traffic segment from your lineup cleanly.
+6. Save your changes to `yourConfig.json` and close it.
+7. In the terminal / command prompt within the main directory, run `npm install --production`. This will install all dependencies required to run the simulator
+8. In the terminal / command prompt within the main directory, run `npm start`. This will spin up a local web server on port 3000 by default.
+9. Visit http://localhost:3000 to view the simulator.
 
 ------------
 
