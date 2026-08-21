@@ -2489,7 +2489,7 @@ function getBeachData() {
   coastForecast()
   
   async function getTides(station) {
-    var Turl = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=" + dateFns.format(new Date(),"yyyy") + dateFns.format(new Date(),"MM") + dateFns.format(new Date(),"dd") + "&end_date=" + dateFns.format((dateFns.addDays(new Date(), 4)),"yyyy") + dateFns.format((dateFns.addDays(new Date(), 4)),"MM") + dateFns.format((dateFns.addDays(new Date(), 4)),"dd") + "&station=" + systemSettings.beach.tides.stations[station].id + "&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=DataAPI_Sample&format=json"
+    var Turl = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=" + dateFns.format(new Date(),"YYYY") + dateFns.format(new Date(),"MM") + dateFns.format(new Date(),"dd") + "&end_date=" + dateFns.format((dateFns.addDays(new Date(), 4)),"YYYY") + dateFns.format((dateFns.addDays(new Date(), 4)),"MM") + dateFns.format((dateFns.addDays(new Date(), 4)),"dd") + "&station=" + systemSettings.beach.tides.stations[station].id + "&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=DataAPI_Sample&format=json"
     
     const Tdata = await $.getJSON(Turl);
 
