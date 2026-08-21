@@ -1,6 +1,71 @@
-Make sure to report any bugs or issues in the Issues tab!
-= Dec 13, 2025 | VERSION 1.1 =
-  -  Fixed manual autoloc not working
-  -  Other fixes
-= Dec 13, 2025 | VERSION 1.11 =
-  -  Fixed data and travel map positioning
+# Weatherscan v2 changelog
+
+Report bugs and other issues through the repository's Issues tab.
+
+## August 16, 2026
+
+- Fixed double-line location names in the LBar.
+- Updated the traffic map to load its hosted Mapbox style directly by URL.
+- Removed the generated local traffic-map style, icon sprites, and conversion script that were no longer needed.
+
+## August 12, 2026
+
+- Isolated HERE traffic request failures so they no longer prevent other weather data from loading.
+- Updated the traffic slide lineup when route-flow data is unavailable.
+- Removed redundant stylesheet, script, and weather-icon preload declarations.
+
+## August 6-7, 2026
+
+- Corrected late-day forecast headers to display "Tomorrow's Forecast."
+- Fixed severe-mode alert evaluation so configured severe alerts are detected correctly.
+
+## July 22, 2026
+
+- Refreshed the traffic-map styling.
+
+## June 1-21, 2026
+
+- Added location-ID support across main, nearby, extra, and LBar locations.
+- Added configurable package and scroller names.
+- Fixed the mini radar failing to return after severe-weather mode.
+- Improved bulletin handling for missing data and unsupported alert types.
+- Corrected loop-completion data refreshes and forecast/minicore scroller transitions.
+- Updated the 2005 audio playlist and removed obsolete audio files.
+
+## May 27-31, 2026
+
+- Reworked audio playback with persistent music and narration players to prevent narration from stopping over time.
+- Made startup wait for asynchronous program and radar initialization.
+- Added safer radar availability and invalid-location handling.
+- Corrected tide, sunrise, and sunset time formatting.
+
+## Version 1.0.1 - May 25, 2026
+
+- Added timezone-aware date and time display.
+- Improved extra-city discovery and location-data selection.
+- Corrected Spanish forecast endpoints, travel-map bounds, and international forecast data.
+- Added radar error handling and additional city-background mappings.
+- Removed the legacy `colsterRadar.js` implementation.
+
+## May 22, 2026
+
+- Overhauled weather-data collection, location handling, startup, and configuration.
+- Revamped LBar data and presentation.
+- Expanded configuration for radar markers, traffic routes, package names, and international map ordering.
+
+## Version 1.0.0 - May 15, 2026
+
+- Initial public release of Weatherscan v2.
+
+## Legacy entries
+
+These entries are preserved from the original changelog.
+
+### Version 1.11 - December 13, 2025
+
+- Fixed data and travel-map positioning.
+
+### Version 1.1 - December 13, 2025
+
+- Fixed manual automatic-location selection.
+- Other fixes.
