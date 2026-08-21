@@ -2407,7 +2407,7 @@ its not 1 for 1 code using so i mean i guess its aight
     font-size: 88px;
     width: 100%;
     height: 228px;/*160px is lowest, 228 is highest*/
-    bottom: 32px;
+    bottom: 20px;
     display: none;
     text-align: center;
 }
