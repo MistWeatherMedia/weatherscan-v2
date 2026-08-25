@@ -680,7 +680,7 @@ async function getCoreData() {
 
   async function getMoons() {
         var ii = 0
-        var firstURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format(new Date(),"M")}&year=${dateFns.format(new Date(),"YYYY")}`
+        var firstURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format(new Date(),"M")}&year=${dateFns.format(new Date(),"yyyy")}`
         
         const firstData = await $.getJSON(firstURL)
 
@@ -704,7 +704,7 @@ async function getCoreData() {
         }
 
         if (weatherData.almanac.moonphases[3].date == "") {
-          var secondURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format((dateFns.addMonths(new Date(),1)),"M")}&year=${dateFns.format(dateFns.addMonths(new Date(),1),"YYYY")}`
+          var secondURL = `https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format((dateFns.addMonths(new Date(),1)),"M")}&year=${dateFns.format(dateFns.addMonths(new Date(),1),"yyyy")}`
           const secondData = await $.getJSON(secondURL)
 
           try {
@@ -2489,7 +2489,7 @@ function getBeachData() {
   coastForecast()
   
   async function getTides(station) {
-    var Turl = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=" + dateFns.format(new Date(),"YYYY") + dateFns.format(new Date(),"MM") + dateFns.format(new Date(),"dd") + "&end_date=" + dateFns.format((dateFns.addDays(new Date(), 4)),"YYYY") + dateFns.format((dateFns.addDays(new Date(), 4)),"MM") + dateFns.format((dateFns.addDays(new Date(), 4)),"dd") + "&station=" + systemSettings.beach.tides.stations[station].id + "&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=DataAPI_Sample&format=json"
+    var Turl = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=" + dateFns.format(new Date(),"yyyy") + dateFns.format(new Date(),"MM") + dateFns.format(new Date(),"dd") + "&end_date=" + dateFns.format((dateFns.addDays(new Date(), 4)),"yyyy") + dateFns.format((dateFns.addDays(new Date(), 4)),"MM") + dateFns.format((dateFns.addDays(new Date(), 4)),"dd") + "&station=" + systemSettings.beach.tides.stations[station].id + "&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=DataAPI_Sample&format=json"
     
     const Tdata = await $.getJSON(Turl);
 
