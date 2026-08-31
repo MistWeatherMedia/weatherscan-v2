@@ -331,7 +331,7 @@ function segmentSet() {
     $("#slides-scroller .package-list-severe").fadeOut(0)
     $("#slides-scroller .package-list").fadeIn(0)
 
-    if (lBarData.radarUnavailable) {
+    if (lBarData.radarUnavailable || systemSettings.LBar.radar.enabled == false) {
       $(".radar-lbar").fadeOut(0)
     } else {
       if (gidx == 0) {
