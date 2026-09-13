@@ -551,6 +551,8 @@ var slidePrograms = {
         $(".titlearrow").css("border-left", "47px solid #d7220b")
         $(".bulletin .alerts").text("")
         $(".bulletin .cityname").text(dataTunnel.locationName)
+        var narArr = vocallocalBulletin(dataTunnel), warningNarrations = false;
+        if(narArr.length > 0){warningNarrations = true}
         var atext = ""
         var remainingHeight
         //max height 478px or 534px
@@ -559,7 +561,10 @@ var slidePrograms = {
           fadeSlideIn($(".bulletin"), 0) 
         }
         for (var i = 0; i < dataTunnel.warnings.length; i++) {
-          atext = atext + dataTunnel.warnings[i] + " " + "\n\n"
+          atext = atext + dataTunnel.warnings[i].desc + " " + "\n\n"
+        }
+        if (warningNarrations == true) {
+          audioPlayer.playVoice(narArr);
         }
         $(".bulletin .alerts").text(atext.slice(0, -2))
         $(".bulletin .group").fadeIn(500)

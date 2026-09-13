@@ -401,7 +401,7 @@ async function getCoreData() {
                 if (array[ii].includes(eventDesc)) duplicate = true;
               }
               if (!duplicate) {
-                array.push(data.alerts[i].headlineText)
+                array.push({type: eventDesc, desc: data.alerts[i].headlineText})
               }
             }
           }
@@ -757,7 +757,7 @@ function getExtraCore(locNum) {
               if (array[ii].includes(eventDesc)) duplicate = true;
             }
             if (!duplicate) {
-              array.push(data.alerts[i].headlineText)
+              array.push({type: eventDesc, desc: data.alerts[i].headlineText})
             }
           }
         }
