@@ -1512,9 +1512,9 @@ async function getAirporData() {
 
     var url = "/airports"
 
-    const eventdata = await $.getJSON(url)
-
     try {
+      const eventdata = await $.getJSON(url)
+
       for (const airportevent of eventdata) {
         var delay = {iataCode:"", arrivalDelay:0, arrivalDelayReason:"", departureDelay:0, departureDelayReason:"",closed:false}
         delay.iataCode = airportevent.airportId
@@ -1589,12 +1589,13 @@ async function getAirporData() {
     }
   }
   grabAirportDelays()
+
   async function getLocalAirports(num) {
     var url = "https://api.weather.com/v3/wx/observations/current?iataCode=" + systemSettings.airport.main[num].iataCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
     
-    const data = await $.getJSON(url)
-    
     try {
+      const data = await $.getJSON(url)
+
       var airportObj = {noReport:true,iataCode:"",airportName:"",arrivalDelay:"",arrivalDelayReason:"",departureDelay:"",departureDelayReason:"",icon:"",condition:"",temperature:""}
       airportObj.noReport = false
       airportObj.airportName = systemSettings.airport.main[num].airportName
@@ -1626,16 +1627,18 @@ async function getAirporData() {
   }
   weatherData.localAirportConditions = []
 
-  for (let i = 0; i < systemSettings.airport.main.length; i++) {
+  if (systemSettings.airport.mainEnabled) {
+    for (let i = 0; i < systemSettings.airport.main.length; i++) {
       await getLocalAirports(i)
+    }
   }
-
+  
   async function getNatAirports(num) {
     var url = "https://api.weather.com/v3/wx/observations/current?iataCode=" + systemSettings.airport.national[num].iataCode + "&units=e&language=en-US&format=json&apiKey=" + api_key
 
-    const data = await $.getJSON(url)
-
     try {
+      const data = await $.getJSON(url)
+
       var airportObj = {noReport:true,iataCode:"",airportName:"",delay:"",delayReason:"",icon:"",temperature:""}
       airportObj.noReport = false
       airportObj.airportName = systemSettings.airport.national[num].airportName
