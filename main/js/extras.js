@@ -2138,6 +2138,14 @@ function getHourAtOffset(offset) {
   
   return hour;
 }
+
+async function updateCrawls() {
+	if (systemSettings.appearanceSettings.adMessage[0] == "network") {
+      const data = await $.getJSON("https://mistwx.com/crawlnetwork.json")
+      systemSettings.appearanceSettings.adMessage = data.crawls.scanv2
+    }
+}
+
 /*
 // convert celsius to farenheight
 function C2F(c){

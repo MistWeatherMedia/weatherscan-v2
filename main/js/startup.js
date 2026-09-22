@@ -167,10 +167,7 @@ requestAnimationFrame(animate);
     $(setWeatherReadyLogo(systemSettings.appearanceSettings.weatherReadyLogo)).fadeIn(0)
     seticonConfiguration(systemSettings.appearanceSettings.iconSet)
 
-    if (systemSettings.appearanceSettings.adMessage[0] == "network") {
-      const data = await $.getJSON("https://mistwx.com/crawlnetwork.json")
-      systemSettings.appearanceSettings.adMessage = data.crawls.scanv2
-    }
+    updateCrawls()
 
     if (traf_key == "nada" || traf_key == "") {
       function fl(id) {

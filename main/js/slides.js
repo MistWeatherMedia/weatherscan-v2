@@ -2821,6 +2821,7 @@ function showSlides() {
     if (gidx >= slideSettings.order[orderidx].slideLineup.length) {
       gidx = 0;
       loadLbarLoc();
+      updateCrawls()
     }
     //check fro severe mode
     //if (slideSettings.order[orderidx].slideLineup[gidx].group != "intro") {
