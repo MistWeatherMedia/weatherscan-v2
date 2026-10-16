@@ -21,7 +21,6 @@ function initializeRadars() {
   miniradar.on('load', function () {
     miniradar.setLayoutProperty('background', 'visibility', 'visible');//ocean
     miniradar.setLayoutProperty('hawaii local', 'visibility', 'visible');//hawaii mercator
-    miniradar.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
     miniradar.setLayoutProperty('alaska', 'visibility', 'visible');//alaska
     miniradar.setLayoutProperty('conus merc', 'visibility', 'visible');//conus mercator
     miniradar.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -54,7 +53,6 @@ function initializeRadars() {
   miniradarAmenitiesTrans.on('load', function () {
     miniradarAmenitiesTrans.setLayoutProperty('background', 'visibility', 'none');//ocean
     miniradarAmenitiesTrans.setLayoutProperty('hawaii local', 'visibility', 'none');//hawaii mercator
-    miniradarAmenitiesTrans.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
     miniradarAmenitiesTrans.setLayoutProperty('alaska', 'visibility', 'none');//alaska
     miniradarAmenitiesTrans.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     miniradarAmenitiesTrans.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -87,7 +85,6 @@ function initializeRadars() {
   miniEchoes.on('load', function () {
     miniEchoes.setLayoutProperty('background', 'visibility', 'none');//ocean
     miniEchoes.setLayoutProperty('hawaii local', 'visibility', 'none');//hawaii mercator
-    miniEchoes.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
     miniEchoes.setLayoutProperty('alaska', 'visibility', 'none');//alaska
     miniEchoes.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     miniEchoes.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -122,8 +119,7 @@ function initializeRadars() {
   });
   locradar.on('load', function () {
     locradar.setLayoutProperty('background', 'visibility', 'visible');//ocean
-    locradar.setLayoutProperty('hawaii local', 'visibility', 'visible');//alaska mercator
-    locradar.setLayoutProperty('hawaii regional', 'visibility', 'visible');//hawaii lambert
+    locradar.setLayoutProperty('hawaii local', 'visibility', 'visible');//hawaii mercator
     locradar.setLayoutProperty('alaska', 'visibility', 'visible');//alaska
     locradar.setLayoutProperty('conus merc', 'visibility', 'visible');//conus mercator
     locradar.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -154,8 +150,7 @@ function initializeRadars() {
   });
   satmap.on('load', function () {
     satmap.setLayoutProperty('background', 'visibility', 'visible');//ocean
-    satmap.setLayoutProperty('hawaii local', 'visibility', 'none');//alaska mercator
-    satmap.setLayoutProperty('hawaii regional', 'visibility', 'visible');//hawaii lambert
+    satmap.setLayoutProperty('hawaii local', 'visibility', 'visible');//hawaii mercator
     satmap.setLayoutProperty('alaska', 'visibility', 'visible');//alaska
     satmap.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     satmap.setLayoutProperty('conus sat', 'visibility', 'visible');//conus lambert
@@ -181,8 +176,7 @@ function initializeRadars() {
   });
   radarEchoes.on('load', function () {
     radarEchoes.setLayoutProperty('background', 'visibility', 'none');//ocean
-    radarEchoes.setLayoutProperty('hawaii local', 'visibility', 'none');//alaska mercator
-    radarEchoes.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
+    radarEchoes.setLayoutProperty('hawaii local', 'visibility', 'none');//hawaii mercator
     radarEchoes.setLayoutProperty('alaska', 'visibility', 'none');//alaska
     radarEchoes.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     radarEchoes.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -213,8 +207,7 @@ function initializeRadars() {
   });
   satEchoes.on('load', function () {
     satEchoes.setLayoutProperty('background', 'visibility', 'none');//ocean
-    satEchoes.setLayoutProperty('hawaii local', 'visibility', 'none');//alaska mercator
-    satEchoes.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
+    satEchoes.setLayoutProperty('hawaii local', 'visibility', 'none');//hawaii mercator
     satEchoes.setLayoutProperty('alaska', 'visibility', 'none');//alaska
     satEchoes.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     satEchoes.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -247,7 +240,6 @@ function initializeRadars() {
   satAmenities.on('load', function () {
     satAmenities.setLayoutProperty('background', 'visibility', 'none');//ocean
     satAmenities.setLayoutProperty('hawaii local', 'visibility', 'none');//alaska mercator
-    satAmenities.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
     satAmenities.setLayoutProperty('alaska', 'visibility', 'none');//alaska
     satAmenities.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     satAmenities.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -276,7 +268,6 @@ function initializeRadars() {
   locradarAmenities.on('load', function () {
     locradarAmenities.setLayoutProperty('background', 'visibility', 'none');//ocean
     locradarAmenities.setLayoutProperty('hawaii local', 'visibility', 'none');//alaska mercator
-    locradarAmenities.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
     locradarAmenities.setLayoutProperty('alaska', 'visibility', 'none');//alaska
     locradarAmenities.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     locradarAmenities.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
@@ -309,7 +300,6 @@ function initializeRadars() {
   locradarAmenitiesTrans.on('load', function () {
     locradarAmenitiesTrans.setLayoutProperty('background', 'visibility', 'none');//ocean
     locradarAmenitiesTrans.setLayoutProperty('hawaii local', 'visibility', 'none');//alaska mercator
-    locradarAmenitiesTrans.setLayoutProperty('hawaii regional', 'visibility', 'none');//hawaii lambert
     locradarAmenitiesTrans.setLayoutProperty('alaska', 'visibility', 'none');//alaska
     locradarAmenitiesTrans.setLayoutProperty('conus merc', 'visibility', 'none');//conus mercator
     locradarAmenitiesTrans.setLayoutProperty('conus sat', 'visibility', 'none');//conus lambert
