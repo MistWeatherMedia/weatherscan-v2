@@ -2,6 +2,33 @@
 
 Report bugs and other issues through the repository's Issues tab.
 
+## October 2, 2026
+
+- Added a GNU General Public License v3 license file.
+
+## September 21, 2026
+
+- Added crawl-network refresh checks at startup and at the end of each slide lineup.
+
+## September 17, 2026
+
+- Added error handling for airport-delay and airport-weather requests to prevent data failures from freezing the airport segment.
+- Skipped local-airport weather requests when the local-airport segment is disabled.
+
+## September 13, 2026
+
+- Added Jim Cantore narration clips and playback for supported weather alerts on bulletin slides.
+
+## August 29-30, 2026
+
+- Corrected Coastal Waters Forecast titles when source data uses full weekday names.
+- Made the LBar radar honor the configured enabled/disabled setting.
+
+## August 24, 2026
+
+- Fixed blank almanac moon phases by correcting the year format in lunar API requests.
+- Restored the correct year format for tide-data requests.
+
 ## August 20-21, 2026
 
 - Adjusted the year formatting used by almanac moon-phase API requests.
@@ -10,6 +37,11 @@ Report bugs and other issues through the repository's Issues tab.
 - Fixed tee-time forecasts using the main-city name instead of the configured golf location name.
 - Changed narration and image references to relative paths so the simulator works when hosted under a URL subpath.
 - Updated `http-proxy-middleware` from 3.0.5 to 3.0.7 to address CVE-2026-55603.
+- Updated `path-to-regexp` from 8.2.0 to 8.4.0 and pinned it with a dependency override to address CVE-2026-4926.
+- Adjusted weekday formatting on the aches-and-pains, breathing, and air-quality slides.
+- Improved spacing between temperatures and conditions in the travel-city ticker.
+- Lowered the daypart forecast temperature text on its bar.
+- Simplified the README setup instructions and documented the local server URL.
 
 ## August 16, 2026
 
